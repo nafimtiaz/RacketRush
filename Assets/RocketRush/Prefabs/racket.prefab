@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1664771477263059039}
-  - component: {fileID: 159008245931356010}
-  - component: {fileID: 1986017627056880638}
+  - component: {fileID: 6710678881485070444}
   m_Layer: 0
   m_Name: racket
   m_TagString: Untagged
@@ -32,56 +31,22 @@ Transform:
   m_Children:
   - {fileID: 6834059591251147711}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &159008245931356010
-BoxCollider:
+--- !u!114 &6710678881485070444
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742660381764606296}
-  m_Material: {fileID: 13400000, guid: d2a0a8f16e44a0c4faaa5b0a7e73a764, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.27510282, y: 0.02657869, z: 0.36414063}
-  m_Center: {x: 0.00016696751, y: -0.0010236371, z: 0.43646365}
---- !u!54 &1986017627056880638
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742660381764606296}
-  serializedVersion: 4
-  m_Mass: 0.3
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72608dc5daf686f498e61d095eca7ece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  racketRigidbody: {fileID: 0}
+  followSpeed: 70
 --- !u!1 &2109099160434806133
 GameObject:
   m_ObjectHideFlags: 0

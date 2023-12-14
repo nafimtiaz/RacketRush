@@ -8,7 +8,7 @@ PhysicMaterial:
   m_PrefabAsset: {fileID: 0}
   m_Name: racketSurface
   dynamicFriction: 0.6
-  staticFriction: 1
+  staticFriction: 2.56
   bounciness: 0.5
   frictionCombine: 0
   bounceCombine: 0
