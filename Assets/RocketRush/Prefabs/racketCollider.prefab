@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 5704402682532519529}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
 --- !u!65 &1587048143081710170
 BoxCollider:
@@ -53,8 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.27510282, y: 0.02657869, z: 0.36414063}
-  m_Center: {x: 0.00016696751, y: -0.0010236371, z: 0.43646365}
+  m_Size: {x: 0.275, y: 0.09022336, z: 0.36000007}
+  m_Center: {x: 0, y: -0.032609902, z: 0.43999997}
 --- !u!54 &2413634823926497759
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 0.3
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -93,7 +93,6 @@ GameObject:
   - component: {fileID: 5704402682532519529}
   - component: {fileID: 5259415960968280834}
   - component: {fileID: 3581973783844140263}
-  - component: {fileID: 8049595560109339195}
   m_Layer: 0
   m_Name: highlighter
   m_TagString: Untagged
@@ -166,24 +165,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8049595560109339195
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6359207857874476005}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using DG.Tweening;
-using RocketRush.RR.Logic;
 using UnityEngine;
 
-namespace RocketRush.RR.Physics
+namespace RocketRush.RR
 {
     public class BallThrower : MonoBehaviour
     {

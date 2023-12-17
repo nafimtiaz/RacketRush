@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
-namespace RocketRush.RR.Logic
+namespace RocketRush.RR
 {
     public class Ball : MonoBehaviour
     {
