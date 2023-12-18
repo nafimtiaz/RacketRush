@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionCenter: {fileID: 7490801580494097350}
-  forceMultiplier: 0.2
+  forceMultiplier: 0.03
   detectionBoxHalfExtents: {x: 0.31, y: 0.16, z: 0.4}
   dynamicRbFollowSpeed: 50
   ballColliderBufferLength: 5
@@ -56,7 +56,7 @@ MonoBehaviour:
   ballLayer:
     serializedVersion: 2
     m_Bits: 128
-  stationaryThreshold: 0.5
+  stationaryThreshold: 0.383
   racketMass: 0.32
 --- !u!1 &1802241456239862275
 GameObject:
