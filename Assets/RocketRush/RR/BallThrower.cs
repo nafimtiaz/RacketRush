@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace RocketRush.RR
 {
+    [RequireComponent(typeof(AudioSource))]
     public class BallThrower : MonoBehaviour
     {
         [SerializeField] private GameObject ballPrefab;
@@ -11,9 +12,16 @@ namespace RocketRush.RR
         [SerializeField] [Range(5f,100f)] private float ballPoolSize;
         [SerializeField] private Transform ballOrigin;
         [SerializeField] [Range(1f, 100f)] private float throwSpeed;
+        [SerializeField] private AudioClip ballThrowSoundClip;
 
         private Sequence _throwSequence;
         private List<Ball> _ballPool;
+        private AudioSource _ballThrowerAudio;
+
+        private void Awake()
+        {
+            PrepareSoundPlayer();
+        }
 
         private void Start()
         {
@@ -68,11 +76,18 @@ namespace RocketRush.RR
                 selectedBall.transform.position = ballOrigin.position;
                 selectedBall.OnBallSelected();
                 selectedBall.BallRigidbody.AddForce(ballOrigin.forward * throwSpeed);
+                _ballThrowerAudio.Play();
             }
             else
             {
                 Debug.LogWarning("No ball available in pool for throwing!");
             }
+        }
+        
+        private void PrepareSoundPlayer()
+        {
+            _ballThrowerAudio = GetComponent<AudioSource>();
+            _ballThrowerAudio.clip = ballThrowSoundClip;
         }
     }
 }
