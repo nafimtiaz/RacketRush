@@ -1,8 +1,9 @@
-using System;
 using UnityEngine;
+using Oculus.Haptics;
 
 namespace RocketRush.RR
 {
+    [RequireComponent(typeof(AudioSource))]
     public class Racket : MonoBehaviour
     {
         [SerializeField] private Transform detectionCenter;
@@ -14,10 +15,14 @@ namespace RocketRush.RR
         [SerializeField] private LayerMask ballLayer;
         [SerializeField] [Range(0f,1f)] private float stationaryThreshold;
         [SerializeField] [Range(0.3f,0.4f)] private float racketMass;
+        [SerializeField] private HapticClip racketHitHapticClip;
+        [SerializeField] private AudioClip racketHitSoundClip;
 
         private Collider[] _colBuffer;
         private Rigidbody _racketDynamicRb;
         private Collider _dynamicRbCollider;
+        private HapticClipPlayer _hapticPlayer;
+        private AudioSource _racketAudio;
 
         private bool IsStationary => _racketDynamicRb.velocity.magnitude <= stationaryThreshold;
 
@@ -25,6 +30,8 @@ namespace RocketRush.RR
         {
             _colBuffer = new Collider[ballColliderBufferLength];
             CreateDynamicRigidbody();
+            PrepareHapticPlayer();
+            PrepareSoundPlayer();
         }
 
         private void FixedUpdate()
@@ -55,6 +62,10 @@ namespace RocketRush.RR
 
             for (int i = 0; i < size; i++)
             {
+                // Play racket hit sound and haptic for each hit with a ball
+                _hapticPlayer.Play(Controller.Right);
+                _racketAudio.Play();
+                
                 var velocity = _racketDynamicRb.velocity;
                 Vector3 forceDir = velocity;
                 float effectiveForce = 10f + (velocity.magnitude * forceMultiplier);
@@ -108,6 +119,23 @@ namespace RocketRush.RR
             _dynamicRbCollider = dynamicRbCollider;
             dynamicRbCollider.size = detectionBoxHalfExtents;
             _dynamicRbCollider.material = racketPhysicsMaterial;
+        }
+
+        #endregion
+
+        #region Sounds And Haptics
+
+        private void PrepareHapticPlayer()
+        {
+            _hapticPlayer = new HapticClipPlayer(racketHitHapticClip);
+            _hapticPlayer.amplitude = 1f;
+            _hapticPlayer.isLooping = false;
+        }
+        
+        private void PrepareSoundPlayer()
+        {
+            _racketAudio = GetComponent<AudioSource>();
+            _racketAudio.clip = racketHitSoundClip;
         }
 
         #endregion
