@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace RacketRush.RR
@@ -8,6 +10,8 @@ namespace RacketRush.RR
         [Tooltip("The points on the dome")]
         [SerializeField] private Transform[] points;
         [SerializeField] private Material targetMaterial;
+        [SerializeField] private Material idleMaterial;
+        [SerializeField] private Material disabledMaterial;
 
         // Each int[] represents the indices of the points of triangular targets
         private int[][] _triangleIndexList = new int[][]
@@ -53,6 +57,9 @@ namespace RacketRush.RR
             new [] {15,25,16},
             new [] {15,16,6}
         };
+
+        private int[] _disabledTriangleIndices =
+            new[] { 3, 4, 5, 6, 16, 17, 18, 19, 20, 21, 22, 23, 24, 36, 37, 38, 39 };
 
         // Cache target objects in _targets list for later use
         private List<GameObject> _targets = new List<GameObject>();
@@ -128,8 +135,18 @@ namespace RacketRush.RR
             meshFilter.mesh = mesh;
             
             target.Populate(triangleIndex);
-            meshRenderer.material = targetMaterial;
+            meshRenderer.material = GetTargetMaterial(triangleIndex);
             _targets.Add(triangleObject);
+        }
+
+        private Material GetTargetMaterial(int triangleIndex)
+        {
+            if (_disabledTriangleIndices.Contains(triangleIndex))
+            {
+                return disabledMaterial;
+            }
+
+            return idleMaterial;
         }
 
         #endregion
