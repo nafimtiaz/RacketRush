@@ -1,7 +1,7 @@
-using UnityEngine;
 using Oculus.Haptics;
+using UnityEngine;
 
-namespace RocketRush.RR
+namespace RacketRush.RR
 {
     [RequireComponent(typeof(AudioSource))]
     public class Racket : MonoBehaviour

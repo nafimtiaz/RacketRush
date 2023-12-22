@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RocketRush.RR
+namespace RacketRush.RR
 {
     public class TargetController : MonoBehaviour
     {

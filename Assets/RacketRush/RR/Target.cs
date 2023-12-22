@@ -1,8 +1,6 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace RocketRush.RR
+namespace RacketRush.RR
 {
     [RequireComponent(typeof(MeshCollider))]
     public class Target : MonoBehaviour
