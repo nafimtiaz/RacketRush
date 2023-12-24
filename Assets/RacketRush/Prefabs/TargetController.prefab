@@ -441,7 +441,7 @@ MonoBehaviour:
   - {fileID: 7772492458114088586}
   - {fileID: 6608193118122139436}
   targetMaterial: {fileID: 2100000, guid: 6e32b82e3b9112f4f8b9a03a551832bd, type: 2}
-  idleMaterial: {fileID: 2100000, guid: 15b1bcc0dc1faaa46ac83d3e60c86253, type: 2}
+  idleMaterial: {fileID: 2100000, guid: a83b3b6f362f69544825380f06533a1b, type: 2}
   disabledMaterial: {fileID: 2100000, guid: 1488df4ad72c7d64b9679cc42f820e4a, type: 2}
 --- !u!1 &4150260115313822696
 GameObject:
