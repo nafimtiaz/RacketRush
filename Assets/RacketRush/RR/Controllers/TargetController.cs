@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using RacketRush.RR.Misc;
 using RacketRush.RR.Physics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace RacketRush.RR.Controllers
 {
@@ -11,7 +14,7 @@ namespace RacketRush.RR.Controllers
     {
         [Tooltip("The points on the dome")]
         [SerializeField] private Transform[] points;
-        [SerializeField] private Material targetMaterial;
+        [SerializeField] private Material activeMaterial;
         [SerializeField] private Material idleMaterial;
         [SerializeField] private Material disabledMaterial;
         [SerializeField] private Transform targetsParent;
@@ -67,20 +70,25 @@ namespace RacketRush.RR.Controllers
             new[] { 3, 4, 5, 6, 16, 17, 18, 19, 20, 21, 22, 23, 24, 36, 37, 38, 39 };
 
         // Cache target objects in _targets list for later use
-        private List<GameObject> _targets = new List<GameObject>();
-
-        private void Start()
-        {
-            GenerateAndCacheTargets();
-        }
+        private List<Target> _targets = new List<Target>();
+        private Sequence _targetSequence;
+        private Target _currentTarget;
+        private int _lastTargetIndex;
+        private List<int> _activeTriangleIndices = new List<int>();
 
         #region Target Creation
 
-        private void GenerateAndCacheTargets()
+        public void GenerateAndCacheTargets()
         {
             for (int i = 0; i < _triangleIndexList.Length; i++)
             {
                 bool isDummy = _disabledTriangleIndices.Contains(i);
+                
+                if (!isDummy)
+                {
+                    _activeTriangleIndices.Add(i);    
+                }
+                
                 GenerateTargetFromPoints(_triangleIndexList[i], i, isDummy);
             }
 
@@ -150,8 +158,8 @@ namespace RacketRush.RR.Controllers
             {
                 Target target = triangleObject.AddComponent<Target>();
                 meshCollider.sharedMesh = mesh;
-                target.Populate(triangleIndex);
-                _targets.Add(triangleObject);
+                target.Populate(triangleIndex, activeMaterial, idleMaterial);
+                _targets.Add(target);
                 triangleObject.transform.SetParent(targetsParent);
             }
             else
@@ -171,5 +179,46 @@ namespace RacketRush.RR.Controllers
         }
 
         #endregion
+
+        #region Target Toggle
+
+        public void PlayNextTarget()
+        {
+            _targetSequence = DOTween.Sequence();
+            _targetSequence.AppendCallback(() =>
+            {
+                if (_currentTarget != null)
+                {
+                    _currentTarget.DisableTarget();    
+                }
+            });
+            _targetSequence.AppendCallback(() =>
+            {
+                int triangleIndex = Random.Range(0, _activeTriangleIndices.Count - 1);
+                _targets[triangleIndex].EnableTarget();
+                _currentTarget = _targets[triangleIndex];
+            });
+            _targetSequence.AppendInterval(3f);
+            _targetSequence.SetLoops(-1);
+        }
+
+        #endregion
+
+        #region Post Target Hit
+
+        private void OnTargetHit(Target t)
+        {
+            // TODO: Handle on target hit
+        }
+
+        #endregion
+
+        private void OnDestroy()
+        {
+            if (_targetSequence != null)
+            {
+                _targetSequence.Kill();
+            }
+        }
     }
 }

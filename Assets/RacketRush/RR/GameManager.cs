@@ -1,3 +1,5 @@
+using System;
+using RacketRush.RR.Controllers;
 using UnityEngine;
 
 namespace RacketRush.RR
@@ -25,6 +27,8 @@ namespace RacketRush.RR
             }
         }
 
+        [SerializeField] private TargetController targetController;
+
         private void Awake()
         {
             if (_instance != null && _instance != this)
@@ -36,6 +40,12 @@ namespace RacketRush.RR
                 _instance = this;
                 DontDestroyOnLoad(this.gameObject);
             }
+        }
+
+        private void Start()
+        {
+            targetController.GenerateAndCacheTargets();
+            targetController.PlayNextTarget();
         }
     }
 }
