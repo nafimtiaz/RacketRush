@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 2469479983083495271, guid: 894a1b01d6143fe498d16cb72a416d2e, type: 3}
   ballThrowInterval: 1
-  ballPoolSize: 20
+  ballPoolSize: 10
   ballOrigin: {fileID: 6089468041027433103}
   throwSpeed: 25.3
   ballThrowSoundClip: {fileID: 8300000, guid: e28ef47c18ec7a441a1e230f1a9ac659, type: 3}

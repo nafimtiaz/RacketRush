@@ -12,6 +12,8 @@ namespace RacketRush.RR
         [SerializeField] private Material targetMaterial;
         [SerializeField] private Material idleMaterial;
         [SerializeField] private Material disabledMaterial;
+        [SerializeField] private Transform targetsParent;
+        [SerializeField] private Transform dummiesParent;
 
         // Each int[] represents the indices of the points of triangular targets
         private int[][] _triangleIndexList = new int[][]
@@ -58,6 +60,7 @@ namespace RacketRush.RR
             new [] {15,16,6}
         };
 
+        // Some triangles are not targets, they just prevent the ball from going outside
         private int[] _disabledTriangleIndices =
             new[] { 3, 4, 5, 6, 16, 17, 18, 19, 20, 21, 22, 23, 24, 36, 37, 38, 39 };
 
@@ -75,17 +78,27 @@ namespace RacketRush.RR
         {
             for (int i = 0; i < _triangleIndexList.Length; i++)
             {
-                GenerateTargetFromPoints(_triangleIndexList[i], i);
+                bool isDummy = _disabledTriangleIndices.Contains(i);
+                GenerateTargetFromPoints(_triangleIndexList[i], i, isDummy);
+            }
+
+            foreach (var i in _disabledTriangleIndices)
+            {
+                GenerateTargetFromPoints(_triangleIndexList[i], i, true, true);
             }
         }
 
-        private void GenerateTargetFromPoints(int[] trianglePoints, int triangleIndex)
+        private void GenerateTargetFromPoints(int[] trianglePoints, int triangleIndex, bool isDummy = false, bool isReverse = false)
         {
-            var mesh = CreateTargetMesh(trianglePoints, triangleIndex, out var triangleObject);
-            PrepareTarget(triangleIndex, triangleObject, mesh);
+            var mesh = CreateTargetMesh(trianglePoints, triangleIndex, out var triangleObject, isReverse);
+            PrepareTarget(triangleIndex, triangleObject, mesh, isDummy);
         }
 
-        private Mesh CreateTargetMesh(int[] trianglePoints, int targetIndex, out GameObject triangleObject)
+        private Mesh CreateTargetMesh(
+            int[] trianglePoints, 
+            int targetIndex, 
+            out GameObject triangleObject,
+            bool isReverse = false)
         {
             Mesh mesh = new Mesh();
 
@@ -107,7 +120,7 @@ namespace RacketRush.RR
             }
 
             // Define triangles (order of vertices matters for face direction)
-            int[] triangles = new int[] { 0, 1, 2 };
+            int[] triangles = isReverse ? GameConstants.TRIANGLE_CW : GameConstants.TRIANGLE_CCW;
 
             // Assign vertices and triangles to the mesh
             mesh.vertices = vertices;
@@ -122,21 +135,27 @@ namespace RacketRush.RR
             return mesh;
         }
         
-        private void PrepareTarget(int triangleIndex, GameObject triangleObject, Mesh mesh)
+        private void PrepareTarget(int triangleIndex, GameObject triangleObject, Mesh mesh, bool isDummy = false)
         {
-            // Add necessary components
             MeshFilter meshFilter = triangleObject.AddComponent<MeshFilter>();
             MeshRenderer meshRenderer = triangleObject.AddComponent<MeshRenderer>();
-            MeshCollider meshCollider = triangleObject.AddComponent<MeshCollider>();
-            Target target = triangleObject.AddComponent<Target>();
-            
-            triangleObject.layer = LayerMask.NameToLayer("Hittable");
-            meshCollider.sharedMesh = mesh;
             meshFilter.mesh = mesh;
-            
-            target.Populate(triangleIndex);
             meshRenderer.material = GetTargetMaterial(triangleIndex);
-            _targets.Add(triangleObject);
+            MeshCollider meshCollider = triangleObject.AddComponent<MeshCollider>();
+            triangleObject.layer = LayerMask.NameToLayer("Hittable");
+
+            if (!isDummy)
+            {
+                Target target = triangleObject.AddComponent<Target>();
+                meshCollider.sharedMesh = mesh;
+                target.Populate(triangleIndex);
+                _targets.Add(triangleObject);
+                triangleObject.transform.SetParent(targetsParent);
+            }
+            else
+            {
+                triangleObject.transform.SetParent(dummiesParent);
+            }
         }
 
         private Material GetTargetMaterial(int triangleIndex)
