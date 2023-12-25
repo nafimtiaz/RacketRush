@@ -1,7 +1,8 @@
 using Oculus.Haptics;
+using RacketRush.RR.Misc;
 using UnityEngine;
 
-namespace RacketRush.RR
+namespace RacketRush.RR.Physics
 {
     [RequireComponent(typeof(AudioSource))]
     public class Racket : MonoBehaviour
@@ -53,7 +54,7 @@ namespace RacketRush.RR
             // When the object is moving fast use overlap box
             // to detect balls instead of default collision
             // Using Non Alloc Overlap box to avoid allocation on each physics update
-            var size = Physics.OverlapBoxNonAlloc(
+            var size = UnityEngine.Physics.OverlapBoxNonAlloc(
                 detectionCenter.position, 
                 detectionBoxHalfExtents, 
                 _colBuffer, 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RacketRush.RR
+namespace RacketRush.RR.Physics
 {
     [RequireComponent(typeof(MeshCollider))]
     public class Target : MonoBehaviour

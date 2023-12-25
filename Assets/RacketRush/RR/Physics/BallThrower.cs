@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-namespace RacketRush.RR
+namespace RacketRush.RR.Physics
 {
     [RequireComponent(typeof(AudioSource))]
     public class BallThrower : MonoBehaviour

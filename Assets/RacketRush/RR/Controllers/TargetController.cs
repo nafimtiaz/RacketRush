@@ -1,10 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using RacketRush.RR.Misc;
+using RacketRush.RR.Physics;
 using UnityEngine;
 
-namespace RacketRush.RR
+namespace RacketRush.RR.Controllers
 {
+    // This class creates and manages the targets
     public class TargetController : MonoBehaviour
     {
         [Tooltip("The points on the dome")]

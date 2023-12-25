@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace RacketRush.RR
+namespace RacketRush.RR.Physics
 {
     [RequireComponent(typeof(AudioSource))]
     public class Ball : MonoBehaviour

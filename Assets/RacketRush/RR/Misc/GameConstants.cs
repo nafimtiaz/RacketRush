@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RacketRush.RR
+namespace RacketRush.RR.Misc
 {
     public class GameConstants : MonoBehaviour
     {
