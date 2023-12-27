@@ -1,4 +1,4 @@
-namespace RacketRush.RR.Misc
+namespace RacketRush.RR.Logic
 {
     public enum GameModeEnum
     {

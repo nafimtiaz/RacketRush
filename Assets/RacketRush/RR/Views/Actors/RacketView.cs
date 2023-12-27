@@ -1,11 +1,11 @@
 using Oculus.Haptics;
-using RacketRush.RR.Misc;
+using RacketRush.RR.Logic;
 using UnityEngine;
 
-namespace RacketRush.RR.Physics
+namespace RacketRush.RR.Views.Actors
 {
     [RequireComponent(typeof(AudioSource))]
-    public class Racket : MonoBehaviour
+    public class RacketView : MonoBehaviour
     {
         [SerializeField] private Transform detectionCenter;
         [SerializeField] [Range(0.01f,1f)] private float forceMultiplier;

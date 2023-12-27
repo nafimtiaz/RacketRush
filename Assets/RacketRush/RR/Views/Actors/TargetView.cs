@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-namespace RacketRush.RR.Physics
+namespace RacketRush.RR.Views.Actors
 {
     [RequireComponent(typeof(MeshCollider))]
-    public class Target : MonoBehaviour
+    public class TargetView : MonoBehaviour
     {
         public int TriangleIndex
         {

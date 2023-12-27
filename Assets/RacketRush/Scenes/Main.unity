@@ -1541,7 +1541,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4290534897363313880, guid: 10267ce87456fc7429080a1f18b2fbcb, type: 3}
       propertyPath: m_Name
-      value: BallThrower
+      value: BallThrowerView
       objectReference: {fileID: 0}
     - target: {fileID: 4290534897363313880, guid: 10267ce87456fc7429080a1f18b2fbcb, type: 3}
       propertyPath: m_IsActive
@@ -2725,7 +2725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3978726923566194539, guid: e5ef55ff0b5bbbe4488c53cd254231ff, type: 3}
       propertyPath: m_Name
-      value: TargetController
+      value: TargetHandlerView
       objectReference: {fileID: 0}
     - target: {fileID: 7694351874160068762, guid: e5ef55ff0b5bbbe4488c53cd254231ff, type: 3}
       propertyPath: dummiesParent
@@ -5753,9 +5753,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a633c06ece5ddc34c9abd09e776a498e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetController: {fileID: 817769559}
+  targetHandlerView: {fileID: 817769559}
   gameStatsView: {fileID: 138060417}
-  ballThrower: {fileID: 1714325503}
+  ballThrowerView: {fileID: 1714325503}
 --- !u!4 &1650636207
 Transform:
   m_ObjectHideFlags: 0

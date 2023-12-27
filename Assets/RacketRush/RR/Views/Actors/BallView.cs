@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-namespace RacketRush.RR.Physics
+namespace RacketRush.RR.Views.Actors
 {
     [RequireComponent(typeof(AudioSource))]
-    public class Ball : MonoBehaviour
+    public class BallView : MonoBehaviour
     {
         [SerializeField] [Range(5f, 20f)] private float ballLife;
         [SerializeField] private AudioClip[] ballCollisionSoundClips;

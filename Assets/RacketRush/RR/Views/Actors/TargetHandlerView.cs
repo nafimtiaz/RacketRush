@@ -2,15 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
-using RacketRush.RR.Misc;
-using RacketRush.RR.Physics;
+using RacketRush.RR.Logic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace RacketRush.RR.Controllers
+namespace RacketRush.RR.Views.Actors
 {
     // This class creates and manages the targets
-    public class TargetController : MonoBehaviour
+    public class TargetHandlerView : MonoBehaviour
     {
         [Tooltip("The points on the dome")]
         [SerializeField] private Transform[] points;
@@ -70,9 +69,9 @@ namespace RacketRush.RR.Controllers
             new[] { 3, 4, 5, 6, 16, 17, 18, 19, 20, 21, 22, 23, 24, 36, 37, 38, 39 };
 
         // Cache target objects in _targets list for later use
-        private List<Target> _targets = new List<Target>();
+        private List<TargetView> _targets = new List<TargetView>();
         private Sequence _targetSequence;
-        private Target _currentTarget;
+        private TargetView _currentTargetView;
         private int _lastTargetIndex;
         private List<int> _activeTriangleIndices = new List<int>();
         private Action _onHitSuccess;
@@ -164,10 +163,10 @@ namespace RacketRush.RR.Controllers
 
             if (!isDummy)
             {
-                Target target = triangleObject.AddComponent<Target>();
+                TargetView targetView = triangleObject.AddComponent<TargetView>();
                 meshCollider.sharedMesh = mesh;
-                target.Populate(triangleIndex, activeMaterial, idleMaterial, _onHitSuccess);
-                _targets.Add(target);
+                targetView.Populate(triangleIndex, activeMaterial, idleMaterial, _onHitSuccess);
+                _targets.Add(targetView);
                 triangleObject.transform.SetParent(targetsParent);
             }
             else
@@ -195,16 +194,16 @@ namespace RacketRush.RR.Controllers
             _targetSequence = DOTween.Sequence();
             _targetSequence.AppendCallback(() =>
             {
-                if (_currentTarget != null)
+                if (_currentTargetView != null)
                 {
-                    _currentTarget.DisableTarget();    
+                    _currentTargetView.DisableTarget();    
                 }
             });
             _targetSequence.AppendCallback(() =>
             {
                 int triangleIndex = Random.Range(0, _activeTriangleIndices.Count - 1);
                 _targets[triangleIndex].EnableTarget();
-                _currentTarget = _targets[triangleIndex];
+                _currentTargetView = _targets[triangleIndex];
             });
             _targetSequence.AppendInterval(3f);
             _targetSequence.SetLoops(-1);
@@ -214,7 +213,7 @@ namespace RacketRush.RR.Controllers
 
         #region Post Target Hit
 
-        private void OnTargetHit(Target t)
+        private void OnTargetHit(TargetView t)
         {
             // TODO: Handle on target hit
         }

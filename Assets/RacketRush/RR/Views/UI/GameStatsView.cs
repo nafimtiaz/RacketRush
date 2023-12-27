@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace RacketRush.RR.Views
+namespace RacketRush.RR.Views.UI
 {
     public class GameStatsView : MonoBehaviour
     {

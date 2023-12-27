@@ -1,7 +1,6 @@
-using RacketRush.RR.Controllers;
-using RacketRush.RR.Misc;
-using RacketRush.RR.Physics;
-using RacketRush.RR.Views;
+using RacketRush.RR.Logic;
+using RacketRush.RR.Views.Actors;
+using RacketRush.RR.Views.UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,9 +8,9 @@ namespace RacketRush.RR
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private TargetController targetController;
+        [SerializeField] private TargetHandlerView targetHandlerView;
         [SerializeField] private GameStatsView gameStatsView;
-        [SerializeField] private BallThrower ballThrower;
+        [SerializeField] private BallThrowerView ballThrowerView;
         
         private static GameManager _instance;
         private GameState _currentState;
@@ -51,8 +50,8 @@ namespace RacketRush.RR
         private void Start()
         {
             PrepareGameState();
-            targetController.Populate(OnHitSuccess);
-            ballThrower.Populate(OnNewBallThrow);
+            targetHandlerView.Populate(OnHitSuccess);
+            ballThrowerView.Populate(OnNewBallThrow);
         }
 
         #region Update Game State

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-namespace RacketRush.RR.Physics
+namespace RacketRush.RR.Views.Actors
 {
     [RequireComponent(typeof(AudioSource))]
-    public class BallThrower : MonoBehaviour
+    public class BallThrowerView : MonoBehaviour
     {
         [SerializeField] private GameObject ballPrefab;
         [SerializeField] [Range(1f,5f)] private float ballThrowInterval;
@@ -16,18 +16,14 @@ namespace RacketRush.RR.Physics
         [SerializeField] private AudioClip ballThrowSoundClip;
 
         private Sequence _throwSequence;
-        private List<Ball> _ballPool;
+        private List<BallView> _ballPool;
         private AudioSource _ballThrowerAudio;
         private Action _onBallThrow;
-
-        private void Awake()
-        {
-            PrepareSoundPlayer();
-        }
 
         public void Populate(Action onBallThrow)
         {
             _onBallThrow = onBallThrow;
+            PrepareSoundPlayer();
             CreateBallPool();
             StartBallThrowSequence();
         }
@@ -35,12 +31,12 @@ namespace RacketRush.RR.Physics
         // Create a pool of balls on start
         private void CreateBallPool()
         {
-            _ballPool = new List<Ball>();
+            _ballPool = new List<BallView>();
         
             for (int ballCount = 0; ballCount < ballPoolSize; ballCount++)
             {
                 var ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
-                _ballPool.Add(ball.GetComponent<Ball>());
+                _ballPool.Add(ball.GetComponent<BallView>());
                 ball.SetActive(false);
             }
         }
@@ -54,9 +50,9 @@ namespace RacketRush.RR.Physics
             _throwSequence.SetLoops(-1);
         }
 
-        private Ball GetBallFromPool()
+        private BallView GetBallFromPool()
         {
-            Ball selectedBall = null;
+            BallView selectedBall = null;
         
             foreach (var ball in _ballPool)
             {
@@ -72,7 +68,7 @@ namespace RacketRush.RR.Physics
 
         private void SelectAndThrowBall()
         {
-            Ball selectedBall = GetBallFromPool();
+            BallView selectedBall = GetBallFromPool();
             
             if (selectedBall != null)
             {
