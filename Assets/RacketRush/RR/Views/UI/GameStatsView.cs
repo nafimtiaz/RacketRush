@@ -17,5 +17,15 @@ namespace RacketRush.RR.Views.UI
         {
             scoreText.text = "0";
         }
+
+        public void UpdateTimer(string time)
+        {
+            timeText.text = time;
+        }
+
+        public void ResetTimer()
+        {
+            timeText.text = "00:00";
+        }
     }
 }

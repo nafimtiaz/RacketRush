@@ -5756,6 +5756,8 @@ MonoBehaviour:
   targetHandlerView: {fileID: 817769559}
   gameStatsView: {fileID: 138060417}
   ballThrowerView: {fileID: 1714325503}
+  baseScorePerHit: 10
+  gameDuration: 120
 --- !u!4 &1650636207
 Transform:
   m_ObjectHideFlags: 0
