@@ -75,7 +75,15 @@ namespace RacketRush.RR.Controllers
         private Target _currentTarget;
         private int _lastTargetIndex;
         private List<int> _activeTriangleIndices = new List<int>();
+        private Action _onHitSuccess;
 
+        public void Populate(Action onHitSuccess)
+        {
+            _onHitSuccess = onHitSuccess;
+            GenerateAndCacheTargets();
+            PlayNextTarget();
+        }
+        
         #region Target Creation
 
         public void GenerateAndCacheTargets()
@@ -158,7 +166,7 @@ namespace RacketRush.RR.Controllers
             {
                 Target target = triangleObject.AddComponent<Target>();
                 meshCollider.sharedMesh = mesh;
-                target.Populate(triangleIndex, activeMaterial, idleMaterial);
+                target.Populate(triangleIndex, activeMaterial, idleMaterial, _onHitSuccess);
                 _targets.Add(target);
                 triangleObject.transform.SetParent(targetsParent);
             }

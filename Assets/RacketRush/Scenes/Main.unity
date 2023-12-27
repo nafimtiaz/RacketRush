@@ -650,8 +650,9 @@ GameObject:
   - component: {fileID: 138060414}
   - component: {fileID: 138060413}
   - component: {fileID: 138060416}
+  - component: {fileID: 138060417}
   m_Layer: 5
-  m_Name: GameStatsCanvas
+  m_Name: GameStatsView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -764,6 +765,20 @@ MonoBehaviour:
   ringFill: 0.5
   ringExternalDiamater: 1000
   ringFlipVertical: 0
+--- !u!114 &138060417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138060411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a6fce8e4ede6246a6930b8cf39a0ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeText: {fileID: 1859684064}
+  scoreText: {fileID: 842259926}
 --- !u!1001 &202851810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5739,6 +5754,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetController: {fileID: 817769559}
+  gameStatsView: {fileID: 138060417}
+  ballThrower: {fileID: 1714325503}
 --- !u!4 &1650636207
 Transform:
   m_ObjectHideFlags: 0
@@ -6002,6 +6019,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 458230, guid: 88f9debe2f5ddd345825fe63934e9530, type: 3}
   m_PrefabInstance: {fileID: 1687440448}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1714325503 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1091839139502452192, guid: 10267ce87456fc7429080a1f18b2fbcb, type: 3}
+  m_PrefabInstance: {fileID: 388597682}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1a105e467d3f04188968ea9c71eb72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1748055451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6403,7 +6431,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 01:34
+  m_text: 00:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 431253aee9fb4fc47b0c0d5c14a35a49, type: 2}
   m_sharedMaterial: {fileID: 4240021889271846979, guid: 431253aee9fb4fc47b0c0d5c14a35a49, type: 2}

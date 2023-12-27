@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -17,14 +18,16 @@ namespace RacketRush.RR.Physics
         private Sequence _throwSequence;
         private List<Ball> _ballPool;
         private AudioSource _ballThrowerAudio;
+        private Action _onBallThrow;
 
         private void Awake()
         {
             PrepareSoundPlayer();
         }
 
-        private void Start()
+        public void Populate(Action onBallThrow)
         {
+            _onBallThrow = onBallThrow;
             CreateBallPool();
             StartBallThrowSequence();
         }
@@ -76,6 +79,7 @@ namespace RacketRush.RR.Physics
                 selectedBall.transform.position = ballOrigin.position;
                 selectedBall.OnBallSelected();
                 selectedBall.BallRigidbody.AddForce(ballOrigin.forward * throwSpeed);
+                _onBallThrow.Invoke();
                 _ballThrowerAudio.Play();
             }
             else

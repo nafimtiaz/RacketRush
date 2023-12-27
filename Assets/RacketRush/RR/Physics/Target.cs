@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RacketRush.RR.Physics
@@ -17,14 +18,16 @@ namespace RacketRush.RR.Physics
         private int _triangleIndex;
         private bool _isActive;
         private MeshRenderer _meshRenderer;
+        private Action _onHitSuccess;
         
-        public void Populate(int triangleIndex, Material activeMaterial, Material idleMaterial)
+        public void Populate(int triangleIndex, Material activeMaterial, Material idleMaterial, Action onHitSuccess)
         {
             _triangleIndex = triangleIndex;
             _meshRenderer = GetComponent<MeshRenderer>();
             _activeMaterial = activeMaterial;
             _idleMaterial = idleMaterial;
             _meshRenderer.material = _idleMaterial;
+            _onHitSuccess = onHitSuccess;
         }
 
         public void EnableTarget()
@@ -43,6 +46,7 @@ namespace RacketRush.RR.Physics
         {
             if (_isActive)
             {
+                _onHitSuccess.Invoke();
                 Debug.Log($"Hit triangle {_triangleIndex}");
             }
         }
