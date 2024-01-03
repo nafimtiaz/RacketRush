@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RacketRush.RR.Views.UI
 {
-    public class GameStatsView : MonoBehaviour
+    public class GameStatsWindowView : BaseWindowView
     {
         [SerializeField] private TextMeshProUGUI timeText;
         [SerializeField] private TextMeshProUGUI scoreText;

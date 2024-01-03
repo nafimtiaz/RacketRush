@@ -11,8 +11,9 @@ namespace RacketRush.RR
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private TargetHandlerView targetHandlerView;
-        [SerializeField] private GameStatsView gameStatsView;
+        [SerializeField] private GameStatsWindowView gameStatsWindowView;
         [SerializeField] private BallThrowerView ballThrowerView;
+        [SerializeField] private HomeWindowView homeWindowView;
         
         [Header("Game Config")]
         [SerializeField] [Tooltip("The base score for each hit without multipliers")]
@@ -60,9 +61,10 @@ namespace RacketRush.RR
         private void Start()
         {
             PrepareGameState();
-            UpdateTimer();
-            targetHandlerView.Populate(OnHitSuccess);
-            ballThrowerView.Populate(OnNewBallThrow);
+            homeWindowView.Populate();
+            //UpdateTimer();
+            //targetHandlerView.Populate(OnHitSuccess);
+            //ballThrowerView.Populate(OnNewBallThrow);
         }
 
         #region Update Game State
@@ -81,7 +83,7 @@ namespace RacketRush.RR
             _timeSequence.AppendCallback(() =>
             {
                 _timeRemaining--;
-                gameStatsView.UpdateTimer(_timeRemaining.ToMinuteAndSecondsString());
+                gameStatsWindowView.UpdateTimer(_timeRemaining.ToMinuteAndSecondsString());
 
                 if (_timeRemaining == 0)
                 {
@@ -99,7 +101,7 @@ namespace RacketRush.RR
         private void OnHitSuccess()
         {
             _currentState.IncrementScoreAndShotsOnTarget(baseScorePerHit);
-            gameStatsView.IncrementScore(_currentState.Score);
+            gameStatsWindowView.IncrementScore(_currentState.Score);
         }
 
         #endregion

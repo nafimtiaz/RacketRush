@@ -1,14 +1,28 @@
 using System.Collections;
+using RacketRush.RR.Utils;
 using UnityEngine;
 
 namespace RacketRush.RR.Views.Actors
 {
     [RequireComponent(typeof(AudioSource))]
-    public class BallView : MonoBehaviour
+    public class BallView : BaseView
     {
         [SerializeField] [Range(5f, 20f)] private float ballLife;
         [SerializeField] private AudioClip[] ballCollisionSoundClips;
         [SerializeField] [Range(1,5)] private int maxCollisionSound;
+        
+        protected override bool IsValidComponent
+        {
+            get
+            { 
+                if (!ballCollisionSoundClips.HasValidLength(4))
+                {
+                    return false;
+                }
+
+                return base.IsValidComponent;
+            }
+        }
 
         private Rigidbody _ballRigidbody;
         private AudioSource _ballAudio;

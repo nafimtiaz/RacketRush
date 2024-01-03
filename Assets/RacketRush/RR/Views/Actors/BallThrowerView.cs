@@ -6,7 +6,7 @@ using UnityEngine;
 namespace RacketRush.RR.Views.Actors
 {
     [RequireComponent(typeof(AudioSource))]
-    public class BallThrowerView : MonoBehaviour
+    public class BallThrowerView : BaseView
     {
         [SerializeField] private GameObject ballPrefab;
         [SerializeField] [Range(1f,5f)] private float ballThrowInterval;
@@ -14,6 +14,21 @@ namespace RacketRush.RR.Views.Actors
         [SerializeField] private Transform ballOrigin;
         [SerializeField] [Range(1f, 100f)] private float throwSpeed;
         [SerializeField] private AudioClip ballThrowSoundClip;
+
+        protected override bool IsValidComponent
+        {
+            get
+            { 
+                if (ballPrefab == null ||
+                    ballOrigin == null ||
+                    ballThrowSoundClip == null)
+                {
+                    return false;
+                }
+
+                return base.IsValidComponent;
+            }
+        }
 
         private Sequence _throwSequence;
         private List<BallView> _ballPool;
