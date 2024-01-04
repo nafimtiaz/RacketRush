@@ -9,24 +9,44 @@ namespace RacketRush.RR.Views.UI
 
         public void Populate()
         {
-            menuWindowView.Populate(OnStartButtonClicked, OnLeaderboardButtonClicked);
-            gameConfigWindowView.Populate();
+            menuWindowView.Populate(this);
+            gameConfigWindowView.Populate(this);
             menuWindowView.ToggleVisibility(true);
             gameConfigWindowView.ToggleVisibility(false);
         }
 
         #region Main Menu
         
-        private void OnStartButtonClicked()
+        public void OnPlayButtonClicked()
         {
             menuWindowView.ToggleVisibility(false);
             gameConfigWindowView.ToggleVisibility(true);
         }
         
-        private void OnLeaderboardButtonClicked()
+        public void OnLeaderboardButtonClicked()
         {
             menuWindowView.ToggleVisibility(false);
             gameConfigWindowView.ToggleVisibility(true);
+        }
+        
+        public void OnQuitButtonClicked()
+        {
+            Application.Quit();
+        }
+
+        #endregion
+        
+        #region Game Config Window
+        
+        public void OnStartButtonClicked()
+        {
+            //TODO: Start main gameplay
+        }
+        
+        public void OnBackButtonClicked()
+        {
+            gameConfigWindowView.ToggleVisibility(false);
+            menuWindowView.ToggleVisibility(true);
         }
 
         #endregion

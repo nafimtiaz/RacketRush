@@ -9,6 +9,8 @@ namespace RacketRush.RR.Views.UI
     {
         private CanvasGroup _canvasGroup;
 
+        public CanvasGroup WindowCanvasGroup => _canvasGroup;
+
         private void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
@@ -16,7 +18,7 @@ namespace RacketRush.RR.Views.UI
 
         public virtual void ToggleVisibility(bool on)
         {
-            _canvasGroup.interactable = on;
+            _canvasGroup.blocksRaycasts = on;
             _canvasGroup.DOFade(on ? 1f : 0f, GameConstants.VIEW_TOGGLE_DURATION);
         }
     }

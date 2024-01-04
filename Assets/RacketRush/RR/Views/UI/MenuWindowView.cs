@@ -10,16 +10,30 @@ namespace RacketRush.RR.Views.UI
         [SerializeField] private Button leaderboardBtn;
         [SerializeField] private Button quitButton;
 
-        public void Populate(Action onStart, Action onLeaderboardBtnClicked)
+        private HomeWindowView _homeWindowView;
+
+        protected override bool IsValidComponent
         {
-            startBtn.onClick.AddListener(onStart.Invoke);
-            leaderboardBtn.onClick.AddListener(onLeaderboardBtnClicked.Invoke);
-            quitButton.onClick.AddListener(OnQuitButtonClicked);
+            get
+            {
+                if (startBtn == null ||
+                    leaderboardBtn == null ||
+                    quitButton == null)
+                {
+                    return false;
+                }
+
+                return base.IsValidComponent;
+            }
         }
 
-        private void OnQuitButtonClicked()
+        public void Populate(HomeWindowView homeWindowView)
         {
-            Application.Quit();
+            _homeWindowView = homeWindowView;
+            startBtn.onClick.AddListener(homeWindowView.OnPlayButtonClicked);
+            leaderboardBtn.onClick.AddListener(homeWindowView.OnLeaderboardButtonClicked);
+            quitButton.onClick.AddListener(homeWindowView.OnQuitButtonClicked);
+            WindowCanvasGroup.blocksRaycasts = true;
         }
     }
 }
