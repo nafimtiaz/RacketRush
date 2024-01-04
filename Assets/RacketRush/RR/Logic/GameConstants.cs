@@ -12,5 +12,9 @@ namespace RacketRush.RR.Logic
         
         public static readonly float VIEW_TOGGLE_DURATION = 0.5f;
         public static readonly float ELEMENTS_TOGGLE_DURATION = 0.25f;
+        
+        public static readonly string[] COUNTDOWN_MSG = { "3","2","1","GO!" };
+        public static readonly float COUNTDOWN_INTERVAL_DUR = 1f;
+        public static readonly Vector3 COUNTDOWN_SCALING = new Vector3(1.5f, 1.5f,1.5f);
     }
 }

@@ -6,6 +6,22 @@ namespace RacketRush.RR.Views.UI
     {
         [SerializeField] private MenuWindowView menuWindowView;
         [SerializeField] private GameConfigWindowView gameConfigWindowView;
+        [SerializeField] private CountdownWindowView countdownWindowView;
+
+        protected override bool IsValidComponent
+        {
+            get
+            {
+                if (menuWindowView == null ||
+                    gameConfigWindowView == null ||
+                    countdownWindowView == null)
+                {
+                    return false;
+                }
+
+                return base.IsValidComponent;
+            }
+        }
 
         public void Populate()
         {
@@ -40,13 +56,24 @@ namespace RacketRush.RR.Views.UI
         
         public void OnStartButtonClicked()
         {
-            GameManager.Instance.StartGame();
+            gameConfigWindowView.ToggleVisibility(false);
+            countdownWindowView.ToggleVisibility(true);
+            StartCountdownSequence();
         }
         
         public void OnBackButtonClicked()
         {
             gameConfigWindowView.ToggleVisibility(false);
             menuWindowView.ToggleVisibility(true);
+        }
+
+        #endregion
+
+        #region Countdown Window
+
+        private void StartCountdownSequence()
+        {
+            countdownWindowView.StartCountdownSequence(GameManager.Instance.StartGame);
         }
 
         #endregion
