@@ -40,7 +40,7 @@ namespace RacketRush.RR.Views.UI
         
         public void OnStartButtonClicked()
         {
-            //TODO: Start main gameplay
+            GameManager.Instance.StartGame();
         }
         
         public void OnBackButtonClicked()

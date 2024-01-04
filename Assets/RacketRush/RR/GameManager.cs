@@ -62,9 +62,6 @@ namespace RacketRush.RR
         {
             PrepareGameState();
             homeWindowView.Populate();
-            //UpdateTimer();
-            //targetHandlerView.Populate(OnHitSuccess);
-            //ballThrowerView.Populate(OnNewBallThrow);
         }
 
         #region Update Game State
@@ -74,6 +71,15 @@ namespace RacketRush.RR
             _currentState = new GameState();
             _currentState.Name = $"SomePlayer_{Random.Range(1, 10)}";
             _timeRemaining = gameDuration;
+        }
+
+        public void StartGame()
+        {
+            homeWindowView.ToggleVisibility(false);
+            gameStatsWindowView.ToggleVisibility(true);
+            targetHandlerView.Populate(OnHitSuccess);
+            ballThrowerView.Populate(OnNewBallThrow);
+            UpdateTimer();
         }
 
         private void UpdateTimer()
