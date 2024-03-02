@@ -45,12 +45,34 @@ namespace RacketRush.RR.Views.UI
         public void Populate(HomeWindowView homeWindowView)
         {
             _homeWindowView = homeWindowView;
-            difficultySelectionView.Populate(Enum.GetNames(typeof(GameModeEnum)).ToList());
-            musicSelectionView.Populate(bgMusicClips.Select(clip => clip.name).ToList());
-            backgroundSelectionView.Populate(bgEnvironments.Select(env => env.gameObject.name).ToList());
+            difficultySelectionView.Populate(Enum.GetNames(typeof(GameModeEnum)).ToList(), OnDifficultyChanged);
+            musicSelectionView.Populate(bgMusicClips.Select(clip => clip.name).ToList(), OnMusicChanged);
+            backgroundSelectionView.Populate(bgEnvironments.Select(env => env.gameObject.name).ToList(), OnBackgroundChanged);
             WindowCanvasGroup.blocksRaycasts = false;
             startButton.onClick.AddListener(homeWindowView.OnStartButtonClicked);
             backButton.onClick.AddListener(homeWindowView.OnBackButtonClicked);
         }
+
+        #region Callbacks
+
+        private void OnDifficultyChanged()
+        {
+            
+        }
+        
+        private void OnMusicChanged()
+        {
+            
+        }
+        
+        private void OnBackgroundChanged()
+        {
+            for (int i = 0; i < bgEnvironments.Length; i++)
+            {
+                bgEnvironments[i].SetActive(i == backgroundSelectionView.SelectionIndex);
+            }
+        }
+
+        #endregion
     }
 }

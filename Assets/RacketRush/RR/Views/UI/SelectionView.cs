@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using RacketRush.RR.Logic;
@@ -16,6 +17,7 @@ namespace RacketRush.RR.Views.UI
 
         private List<string> _options;
         private int _selectedOptionIndex;
+        private Action _onChange;
 
         public int SelectionIndex
         {
@@ -23,8 +25,12 @@ namespace RacketRush.RR.Views.UI
             set => _selectedOptionIndex = value;
         }
 
-        public void Populate(List<string> options)
+        public string CurrentSelection => _options[_selectedOptionIndex];
+
+        public void Populate(List<string> options, Action onChange)
         {
+            _onChange = onChange;
+            
             if (options != null && options.Count > 0)
             {
                 _options = options;
@@ -61,9 +67,11 @@ namespace RacketRush.RR.Views.UI
 
                 if (hasChanged)
                 {
+                    _onChange.Invoke();
                     currentValue.DOFade(0f, 0f);
                     currentValue.text = _options[_selectedOptionIndex];
                     currentValue.DOFade(1f, GameConstants.ELEMENTS_TOGGLE_DURATION);
+                    
                 }
             };
         }
