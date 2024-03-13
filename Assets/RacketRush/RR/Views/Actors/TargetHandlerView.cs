@@ -73,20 +73,27 @@ namespace RacketRush.RR.Views.Actors
         private Sequence _targetSequence;
         private TargetView _currentTargetView;
         private int _lastTargetIndex;
-        private List<int> _activeTriangleIndices = new List<int>();
+        private List<int> _activeTriangleIndices;
         private Action _onHitSuccess;
 
         public void Populate(Action onHitSuccess)
         {
             _onHitSuccess = onHitSuccess;
             GenerateAndCacheTargets();
-            PlayNextTarget();
+            StartTargetGeneration();
         }
         
         #region Target Creation
 
         public void GenerateAndCacheTargets()
         {
+            if (_activeTriangleIndices != null)
+            {
+                return;
+            }
+
+            _activeTriangleIndices = new List<int>();
+            
             for (int i = 0; i < _triangleIndexList.Length; i++)
             {
                 bool isDummy = _disabledTriangleIndices.Contains(i);
@@ -189,7 +196,7 @@ namespace RacketRush.RR.Views.Actors
 
         #region Target Toggle
 
-        public void PlayNextTarget()
+        public void StartTargetGeneration()
         {
             _targetSequence = DOTween.Sequence();
             _targetSequence.AppendCallback(() =>
@@ -207,6 +214,14 @@ namespace RacketRush.RR.Views.Actors
             });
             _targetSequence.AppendInterval(3f);
             _targetSequence.SetLoops(-1);
+        }
+
+        public void StopTargetGeneration()
+        {
+            if (_targetSequence != null)
+            {
+                _targetSequence.Kill();
+            }
         }
 
         #endregion

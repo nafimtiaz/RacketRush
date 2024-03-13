@@ -46,6 +46,12 @@ namespace RacketRush.RR.Views.Actors
         // Create a pool of balls on start
         private void CreateBallPool()
         {
+            // no need to create pool if its already populated
+            if (_ballPool != null && _ballPool.Count >= ballPoolSize)
+            {
+                return;
+            }
+            
             _ballPool = new List<BallView>();
         
             for (int ballCount = 0; ballCount < ballPoolSize; ballCount++)
@@ -63,6 +69,14 @@ namespace RacketRush.RR.Views.Actors
             _throwSequence.AppendInterval(ballThrowInterval);
             _throwSequence.AppendCallback(SelectAndThrowBall);
             _throwSequence.SetLoops(-1);
+        }
+        
+        public void StopBallThrowSequence()
+        {
+            if (_throwSequence != null)
+            {
+                _throwSequence.Kill();
+            }
         }
 
         private BallView GetBallFromPool()

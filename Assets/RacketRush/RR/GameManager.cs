@@ -117,6 +117,8 @@ namespace RacketRush.RR
         {
             racketBody.SetActive(false);
             homeWindowView.ToggleVisibility(true);
+            ballThrowerView.StopBallThrowSequence();
+            targetHandlerView.StopTargetGeneration();
         }
 
         #endregion
