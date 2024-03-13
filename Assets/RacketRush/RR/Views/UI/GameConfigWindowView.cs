@@ -19,6 +19,7 @@ namespace RacketRush.RR.Views.UI
         [SerializeField] private Button startButton;
         [SerializeField] private AudioClip[] bgMusicClips;
         [SerializeField] private GameObject[] bgEnvironments;
+        [SerializeField] private AudioSource bgAudioSource;
 
         private HomeWindowView _homeWindowView;
 
@@ -33,7 +34,8 @@ namespace RacketRush.RR.Views.UI
                     backButton == null ||
                     startButton == null ||
                     bgMusicClips.HasValidLength(3) ||
-                    bgEnvironments.HasValidLength(3))
+                    bgEnvironments.HasValidLength(3) ||
+                    bgAudioSource == null)
                 {
                     return false;
                 }
@@ -62,7 +64,9 @@ namespace RacketRush.RR.Views.UI
         
         private void OnMusicChanged()
         {
-            
+            int musicIndex = musicSelectionView.CurrentSelection == MusicModeEnum.On.ToString() ? 0 : 1;
+            bgAudioSource.clip = bgMusicClips[musicIndex];
+            bgAudioSource.Play();
         }
         
         private void OnBackgroundChanged()

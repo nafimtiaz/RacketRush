@@ -463,15 +463,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2961585b727154d4b89263169c9ed9b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuWindowView: {fileID: 0}
+  menuWindowView: {fileID: 5547537080249193670}
   nameField: {fileID: 5013573131482671232}
   difficultySelectionView: {fileID: 8980809468040044688}
   musicSelectionView: {fileID: 5171273103728634565}
   backgroundSelectionView: {fileID: 9214232972990779040}
   backButton: {fileID: 8854418405016999797}
   startButton: {fileID: 5763127281284063452}
-  bgMusicClips: []
-  bgEnvironments: []
+  bgMusicClips:
+  - {fileID: 8300000, guid: e6a949b5987e9de418b7aec60c9155f7, type: 3}
+  - {fileID: 8300000, guid: bddc31f793e673045bb6d45001914dfa, type: 3}
+  bgEnvironments:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  bgAudioSource: {fileID: 0}
 --- !u!1 &1133970857328755251
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ namespace RacketRush.RR.Views.UI
         [SerializeField] private MenuWindowView menuWindowView;
         [SerializeField] private GameConfigWindowView gameConfigWindowView;
         [SerializeField] private CountdownWindowView countdownWindowView;
+        [SerializeField] private GameObject uiPointer;
 
         protected override bool IsValidComponent
         {
@@ -14,7 +15,8 @@ namespace RacketRush.RR.Views.UI
             {
                 if (menuWindowView == null ||
                     gameConfigWindowView == null ||
-                    countdownWindowView == null)
+                    countdownWindowView == null ||
+                    uiPointer == null)
                 {
                     return false;
                 }
@@ -29,6 +31,12 @@ namespace RacketRush.RR.Views.UI
             gameConfigWindowView.Populate(this);
             menuWindowView.ToggleVisibility(true);
             gameConfigWindowView.ToggleVisibility(false);
+        }
+
+        public override void ToggleVisibility(bool on)
+        {
+            base.ToggleVisibility(on);
+            uiPointer.SetActive(on);
         }
 
         #region Main Menu

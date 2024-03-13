@@ -14,6 +14,7 @@ namespace RacketRush.RR
         [SerializeField] private GameStatsWindowView gameStatsWindowView;
         [SerializeField] private BallThrowerView ballThrowerView;
         [SerializeField] private HomeWindowView homeWindowView;
+        [SerializeField] private GameObject racketBody;
         
         [Header("Game Config")]
         [SerializeField] [Tooltip("The base score for each hit without multipliers")]
@@ -75,6 +76,7 @@ namespace RacketRush.RR
 
         public void StartGame()
         {
+            racketBody.SetActive(true);
             homeWindowView.ToggleVisibility(false);
             gameStatsWindowView.ToggleVisibility(true);
             targetHandlerView.Populate(OnHitSuccess);
@@ -94,6 +96,7 @@ namespace RacketRush.RR
                 if (_timeRemaining == 0)
                 {
                     _timeSequence.Kill();
+                    OnGameEnded();
                 }
             });
             _timeSequence.SetLoops(-1);
@@ -108,6 +111,12 @@ namespace RacketRush.RR
         {
             _currentState.IncrementScoreAndShotsOnTarget(baseScorePerHit);
             gameStatsWindowView.IncrementScore(_currentState.Score);
+        }
+
+        private void OnGameEnded()
+        {
+            racketBody.SetActive(false);
+            homeWindowView.ToggleVisibility(true);
         }
 
         #endregion
