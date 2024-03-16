@@ -76,6 +76,7 @@ namespace RacketRush.RR.Views.Actors
             if (_throwSequence != null)
             {
                 _throwSequence.Kill();
+                _throwSequence = null;
             }
         }
 

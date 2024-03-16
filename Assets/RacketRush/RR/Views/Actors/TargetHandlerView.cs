@@ -240,6 +240,7 @@ namespace RacketRush.RR.Views.Actors
             if (_targetSequence != null)
             {
                 _targetSequence.Kill();
+                _targetSequence = null;
             }
         }
     }

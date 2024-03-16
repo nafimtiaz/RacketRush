@@ -30,5 +30,12 @@ namespace RacketRush.RR.Logic
         {
             BallThrowCount++;
         }
+
+        public void ResetProgressionsOnly()
+        {
+            Score = 0;
+            BallThrowCount = 0;
+            ShotsOnTarget = 0;
+        }
     }
 }

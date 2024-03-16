@@ -1552,10 +1552,6 @@ PrefabInstance:
       propertyPath: far clip plane
       value: 3000
       objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
-      propertyPath: useRecommendedMSAALevel
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -20185,7 +20181,7 @@ MonoBehaviour:
   homeWindowView: {fileID: 8382886983758471068}
   racketBody: {fileID: 1677284967}
   baseScorePerHit: 10
-  gameDuration: 30
+  gameDuration: 10
 --- !u!4 &1650636207
 Transform:
   m_ObjectHideFlags: 0
@@ -28181,10 +28177,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8094220961122008919, guid: 056f42a4bf933d64b87a4e5490ee0e97, type: 3}
-      propertyPath: m_Alpha
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873225029478510059, guid: 056f42a4bf933d64b87a4e5490ee0e97, type: 3}
       propertyPath: m_Alpha
       value: 1
       objectReference: {fileID: 0}

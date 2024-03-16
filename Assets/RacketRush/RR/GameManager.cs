@@ -26,6 +26,7 @@ namespace RacketRush.RR
         private GameState _currentState;
         private int _timeRemaining;
         private Sequence _timeSequence;
+        private bool _isGameRunning;
 
         public static GameManager Instance
         {
@@ -61,17 +62,25 @@ namespace RacketRush.RR
 
         private void Start()
         {
-            PrepareGameState();
+            InitGameState();
             homeWindowView.Populate();
         }
 
         #region Update Game State
 
-        private void PrepareGameState()
+        public static void InitGameState(bool fromExistingProfile = false)
         {
-            _currentState = new GameState();
-            _currentState.Name = $"SomePlayer_{Random.Range(1, 10)}";
-            _timeRemaining = gameDuration;
+            if (!fromExistingProfile)
+            {
+                _instance._currentState = new GameState();
+                _instance._currentState.Name = $"SomePlayer_{Random.Range(1, 10)}";
+            }
+            else
+            {
+                _instance._currentState.ResetProgressionsOnly();
+            }
+            
+            _instance._timeRemaining = _instance.gameDuration;
         }
 
         public void StartGame()
@@ -79,8 +88,10 @@ namespace RacketRush.RR
             racketBody.SetActive(true);
             homeWindowView.ToggleVisibility(false);
             gameStatsWindowView.ToggleVisibility(true);
+            gameStatsWindowView.ResetValues();
             targetHandlerView.Populate(OnHitSuccess);
             ballThrowerView.Populate(OnNewBallThrow);
+            _isGameRunning = true;
             UpdateTimer();
         }
 
@@ -93,9 +104,8 @@ namespace RacketRush.RR
                 _timeRemaining--;
                 gameStatsWindowView.UpdateTimer(_timeRemaining.ToMinuteAndSecondsString());
 
-                if (_timeRemaining == 0)
+                if (_timeRemaining <= 0)
                 {
-                    _timeSequence.Kill();
                     OnGameEnded();
                 }
             });
@@ -104,18 +114,27 @@ namespace RacketRush.RR
 
         private void OnNewBallThrow()
         {
-            _currentState.IncrementBallThrowCount();
+            if (_isGameRunning)
+            {
+                _currentState.IncrementBallThrowCount();
+            }
         }
 
         private void OnHitSuccess()
         {
-            _currentState.IncrementScoreAndShotsOnTarget(baseScorePerHit);
-            gameStatsWindowView.IncrementScore(_currentState.Score);
+            if (_isGameRunning)
+            {
+                _currentState.IncrementScoreAndShotsOnTarget(baseScorePerHit);
+                gameStatsWindowView.IncrementScore(_currentState.Score);   
+            }
         }
 
         private void OnGameEnded()
         {
+            _timeSequence.Kill();
+            _isGameRunning = false;
             racketBody.SetActive(false);
+            homeWindowView.ShowScore(_currentState.Score);
             homeWindowView.ToggleVisibility(true);
             ballThrowerView.StopBallThrowSequence();
             targetHandlerView.StopTargetGeneration();
@@ -128,6 +147,7 @@ namespace RacketRush.RR
             if (_timeSequence != null)
             {
                 _timeSequence.Kill();
+                _timeSequence = null;
             }
         }
     }

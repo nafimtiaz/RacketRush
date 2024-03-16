@@ -7,6 +7,7 @@ namespace RacketRush.RR.Views.UI
         [SerializeField] private MenuWindowView menuWindowView;
         [SerializeField] private GameConfigWindowView gameConfigWindowView;
         [SerializeField] private CountdownWindowView countdownWindowView;
+        [SerializeField] private ScorePopupWindowView scorePopupWindowView;
         [SerializeField] private GameObject uiPointer;
 
         protected override bool IsValidComponent
@@ -16,6 +17,7 @@ namespace RacketRush.RR.Views.UI
                 if (menuWindowView == null ||
                     gameConfigWindowView == null ||
                     countdownWindowView == null ||
+                    scorePopupWindowView == null ||
                     uiPointer == null)
                 {
                     return false;
@@ -31,6 +33,8 @@ namespace RacketRush.RR.Views.UI
             gameConfigWindowView.Populate(this);
             menuWindowView.ToggleVisibility(true);
             gameConfigWindowView.ToggleVisibility(false);
+            scorePopupWindowView.ToggleVisibility(false);
+            scorePopupWindowView.Populate(this);
         }
 
         public override void ToggleVisibility(bool on)
@@ -65,8 +69,7 @@ namespace RacketRush.RR.Views.UI
         public void OnStartButtonClicked()
         {
             gameConfigWindowView.ToggleVisibility(false);
-            countdownWindowView.ToggleVisibility(true);
-            StartCountdownSequence();
+            StartMainGameSequence();
         }
         
         public void OnBackButtonClicked()
@@ -79,9 +82,38 @@ namespace RacketRush.RR.Views.UI
 
         #region Countdown Window
 
-        private void StartCountdownSequence()
+        private void StartMainGameSequence()
         {
-            countdownWindowView.StartCountdownSequence(GameManager.Instance.StartGame);
+            countdownWindowView.ToggleVisibility(true);
+            countdownWindowView.StartCountdownSequence(() =>
+            {
+                countdownWindowView.ToggleVisibility(false);
+                GameManager.Instance.StartGame();
+            });
+        }
+
+        #endregion
+        
+        #region Score Popup
+
+        public void ShowScore(int score)
+        {
+            scorePopupWindowView.ToggleVisibility(true);
+            scorePopupWindowView.SetScore(score);
+        }
+
+        public void PlayAgainFromScorePopup()
+        {
+            scorePopupWindowView.ToggleVisibility(false);
+            GameManager.InitGameState(true);
+            StartMainGameSequence();
+        }
+        
+        public void BackToMenuFromScorePopup()
+        {
+            scorePopupWindowView.ToggleVisibility(false);
+            menuWindowView.ToggleVisibility(true);
+            GameManager.InitGameState();
         }
 
         #endregion

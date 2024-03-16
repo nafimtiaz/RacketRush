@@ -68,6 +68,7 @@ namespace RacketRush.RR.Views.UI
             if (_countdownSequence != null)
             {
                 _countdownSequence.Kill();
+                _countdownSequence = null;
             }
         }
     }
