@@ -20,6 +20,7 @@ namespace RacketRush.RR.Views.UI
         [SerializeField] private AudioClip[] bgMusicClips;
         [SerializeField] private GameObject[] bgEnvironments;
         [SerializeField] private AudioSource bgAudioSource;
+        [SerializeField] private KeyboardView keyboardView;
 
         private HomeWindowView _homeWindowView;
 
@@ -35,7 +36,8 @@ namespace RacketRush.RR.Views.UI
                     startButton == null ||
                     bgMusicClips.HasValidLength(3) ||
                     bgEnvironments.HasValidLength(3) ||
-                    bgAudioSource == null)
+                    bgAudioSource == null ||
+                    keyboardView == null)
                 {
                     return false;
                 }
@@ -53,6 +55,7 @@ namespace RacketRush.RR.Views.UI
             WindowCanvasGroup.blocksRaycasts = false;
             startButton.onClick.AddListener(homeWindowView.OnStartButtonClicked);
             backButton.onClick.AddListener(homeWindowView.OnBackButtonClicked);
+            keyboardView.Populate(this, nameField);
         }
 
         #region Callbacks

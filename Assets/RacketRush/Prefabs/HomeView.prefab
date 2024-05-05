@@ -705,7 +705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6886591952578869846
 RectTransform:
   m_ObjectHideFlags: 0
@@ -723,10 +723,10 @@ RectTransform:
   m_Father: {fileID: 2678085183241189766}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 700, y: -177.49995}
+  m_SizeDelta: {x: 1200, y: 104.99997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1180593953482206546
 CanvasRenderer:
@@ -892,7 +892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -199.99991, y: -337.5992, z: -0.00072337885}
+  savedPos: {x: -200.00096, y: -337.5991, z: 0.00026650456}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 290, y: 104}
   savedColor: {r: 0.23921569, g: 0.6156863, b: 0.7529412, a: 0.5882353}
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 0, y: 0, z: 0}
+  savedPos: {x: -0.00022492363, y: 10.000658, z: 0.00024266262}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 80, y: 80}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2553,7 +2553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 199.99988, y: -337.5992, z: -0.000525514}
+  savedPos: {x: 200.00052, y: -337.5991, z: 0.00021882067}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 290, y: 104}
   savedColor: {r: 0.23921569, g: 0.6156863, b: 0.7529412, a: 0.5882353}
@@ -2879,7 +2879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 523.9999, y: -177.49922, z: -0.0009405948}
+  savedPos: {x: 523.9999, y: -156.66609, z: 0.00018019693}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 80, y: 80}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3485,9 +3485,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 0, y: 0, z: 0}
+  savedPos: {x: -0.00022492363, y: 10.000658, z: 0.00024266262}
   savedUp: {x: 0, y: 1, z: 0}
-  savedRectSize: {x: 1200, y: 104.99997}
+  savedRectSize: {x: 1200, y: 146.66663}
   savedColor: {r: 0.23921569, g: 0.6156863, b: 0.7529412, a: 0.392}
   savedTextUV0: {x: 0, y: 0}
   savedFill: 1
@@ -4697,9 +4697,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 0, y: 0, z: 0}
+  savedPos: {x: -0.00022492363, y: -156.66609, z: 0.00024266262}
   savedUp: {x: 0, y: 1, z: 0}
-  savedRectSize: {x: 1200, y: 104.99997}
+  savedRectSize: {x: 1200, y: 146.66663}
   savedColor: {r: 0.23921569, g: 0.6156863, b: 0.7529412, a: 0.392}
   savedTextUV0: {x: 0, y: 0}
   savedFill: 1
@@ -5603,9 +5603,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 265.0002, y: 197.0007, z: -0.0005155411}
+  savedPos: {x: 265.0001, y: 176.1672, z: 0.00021107211}
   savedUp: {x: 0, y: 1, z: 0}
-  savedRectSize: {x: 550, y: 51.99997}
+  savedRectSize: {x: 550, y: 93.666626}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
   savedTextUV0: {x: 0, y: 0}
   savedFill: 1
@@ -5845,11 +5845,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: 0
-  quality: 1
+  quality: 3
   interactable: 1
   blocksRaycasts: 1
   forceUseBoxCollider: 0
-  angle: 90
+  angle: 30
   preserveAspect: 1
   vertAngle: 90
   ringFill: 0.5
@@ -6396,7 +6396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 523.9999, y: -52.49922, z: -0.0009405948}
+  savedPos: {x: 523.9999, y: 10.000658, z: 0.00018019693}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 80, y: 80}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -6706,7 +6706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 0, y: 0, z: 0}
+  savedPos: {x: -0.00022492363, y: -156.66609, z: 0.00024266262}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 80, y: 80}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -6903,9 +6903,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 265.0002, y: 197.50066, z: -0.0005155411}
+  savedPos: {x: 265.0001, y: 176.66716, z: 0.00021107211}
   savedUp: {x: 0, y: 1, z: 0}
-  savedRectSize: {x: 570, y: 64.99997}
+  savedRectSize: {x: 570, y: 106.666626}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
   savedTextUV0: {x: 0, y: 0}
   savedFill: 1
@@ -7155,9 +7155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 0, y: 0, z: 0}
+  savedPos: {x: -0.00022492363, y: 176.66716, z: 0.00024266262}
   savedUp: {x: 0, y: 1, z: 0}
-  savedRectSize: {x: 1200, y: 104.99997}
+  savedRectSize: {x: 1200, y: 146.66663}
   savedColor: {r: 0.23921569, g: 0.6156863, b: 0.7529412, a: 0.392}
   savedTextUV0: {x: 0, y: 0}
   savedFill: 1

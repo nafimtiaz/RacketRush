@@ -16,5 +16,10 @@ namespace RacketRush.RR.Logic
         public static readonly string[] COUNTDOWN_MSG = { "3","2","1","GO!" };
         public static readonly float COUNTDOWN_INTERVAL_DUR = 1f;
         public static readonly Vector3 COUNTDOWN_SCALING = new Vector3(1.5f, 1.5f,1.5f);
+
+        public static readonly int KEYBOARD_CHAR_LETTER_INIT = 65;
+        public static readonly int KEYBOARD_CHAR_LETTER_LAST = 90;
+        public static readonly int KEYBOARD_CHAR_NUMBER_INIT = 48;
+        public static readonly int KEYBOARD_CHAR_NUMBER_LAST = 57;
     }
 }
