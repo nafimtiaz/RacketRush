@@ -14,6 +14,9 @@ namespace RacketRush.RR.Views.Actors
         [SerializeField] private Transform ballOrigin;
         [SerializeField] [Range(1f, 100f)] private float throwSpeed;
         [SerializeField] private AudioClip ballThrowSoundClip;
+        [SerializeField] private Animator ballThrowerPlatformAnimator;
+        [SerializeField] private Transform ballThrowerDeviceParent;
+        [SerializeField] private Transform ballThrowerLookAtPoint;
 
         protected override bool IsValidComponent
         {
@@ -21,7 +24,10 @@ namespace RacketRush.RR.Views.Actors
             { 
                 if (ballPrefab == null ||
                     ballOrigin == null ||
-                    ballThrowSoundClip == null)
+                    ballThrowSoundClip == null ||
+                    ballThrowerPlatformAnimator == null ||
+                    ballThrowerLookAtPoint == null ||
+                    ballThrowerDeviceParent == null)
                 {
                     return false;
                 }
@@ -34,6 +40,7 @@ namespace RacketRush.RR.Views.Actors
         private List<BallView> _ballPool;
         private AudioSource _ballThrowerAudio;
         private Action _onBallThrow;
+        private bool _isActive;
 
         public void Populate(Action onBallThrow)
         {
@@ -41,6 +48,14 @@ namespace RacketRush.RR.Views.Actors
             PrepareSoundPlayer();
             CreateBallPool();
             StartBallThrowSequence();
+        }
+
+        private void Update()
+        {
+            if (_isActive)
+            {
+                ballThrowerDeviceParent.LookAt(ballThrowerLookAtPoint);
+            }
         }
 
         // Create a pool of balls on start
@@ -65,19 +80,33 @@ namespace RacketRush.RR.Views.Actors
         // This sequence will throw balls at a time interval
         private void StartBallThrowSequence()
         {
+            _isActive = true;
             _throwSequence = DOTween.Sequence();
             _throwSequence.AppendInterval(ballThrowInterval);
-            _throwSequence.AppendCallback(SelectAndThrowBall);
+            _throwSequence.AppendCallback(() =>
+            {
+                ToggleThrowerPlatformMovement(true);
+                SelectAndThrowBall();
+            });
             _throwSequence.SetLoops(-1);
+        }
+
+        private void ToggleThrowerPlatformMovement(bool isActive)
+        {
+            ballThrowerPlatformAnimator.SetBool("IsActive", isActive);
         }
         
         public void StopBallThrowSequence()
         {
+            _isActive = false;
+            
             if (_throwSequence != null)
             {
                 _throwSequence.Kill();
                 _throwSequence = null;
             }
+            
+            ToggleThrowerPlatformMovement(false);
         }
 
         private BallView GetBallFromPool()
