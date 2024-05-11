@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using DG.Tweening;
 using RacketRush.RR.Logic;
 using RacketRush.RR.Utils;
 using TMPro;
@@ -22,6 +23,7 @@ namespace RacketRush.RR.Views.UI
         [SerializeField] private GameObject[] bgEnvironments;
         [SerializeField] private AudioSource bgAudioSource;
         [SerializeField] private KeyboardView keyboardView;
+        [SerializeField] private Image tintOverlay;
 
         private HomeWindowView _homeWindowView;
 
@@ -38,7 +40,8 @@ namespace RacketRush.RR.Views.UI
                     bgMusicClips.HasValidLength(3) ||
                     bgEnvironments.HasValidLength(3) ||
                     bgAudioSource == null ||
-                    keyboardView == null)
+                    keyboardView == null ||
+                    tintOverlay == null)
                 {
                     return false;
                 }
@@ -78,8 +81,12 @@ namespace RacketRush.RR.Views.UI
             UpdateStartButtonInteractivity();
             base.ToggleVisibility(on);
         }
-        
-        
+
+        public override void ToggleInteractivity(bool on)
+        {
+            tintOverlay.DOFade(on ? 0f : 0.8f, 0.5f);
+            base.ToggleInteractivity(on);
+        }
 
         public UnityAction<string> UpdateStartButtonInteractivity()
         {
