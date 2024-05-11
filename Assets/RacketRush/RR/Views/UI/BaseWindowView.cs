@@ -21,5 +21,10 @@ namespace RacketRush.RR.Views.UI
             _canvasGroup.blocksRaycasts = on;
             _canvasGroup.DOFade(on ? 1f : 0f, GameConstants.VIEW_TOGGLE_DURATION);
         }
+        
+        public virtual void ToggleInteractivity(bool on)
+        {
+            _canvasGroup.blocksRaycasts = on;
+        }
     }
 }

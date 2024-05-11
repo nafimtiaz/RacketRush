@@ -4,6 +4,7 @@ using RacketRush.RR.Logic;
 using RacketRush.RR.Utils;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace RacketRush.RR.Views.UI
@@ -49,21 +50,46 @@ namespace RacketRush.RR.Views.UI
         public void Populate(HomeWindowView homeWindowView)
         {
             _homeWindowView = homeWindowView;
-            difficultySelectionView.Populate(Enum.GetNames(typeof(GameModeEnum)).ToList(), OnDifficultyChanged);
             musicSelectionView.Populate(bgMusicClips.Select(clip => clip.name).ToList(), OnMusicChanged);
             backgroundSelectionView.Populate(bgEnvironments.Select(env => env.gameObject.name).ToList(), OnBackgroundChanged);
             WindowCanvasGroup.blocksRaycasts = false;
             startButton.onClick.AddListener(homeWindowView.OnStartButtonClicked);
             backButton.onClick.AddListener(homeWindowView.OnBackButtonClicked);
             keyboardView.Populate(this, nameField);
+            nameField.onSelect.AddListener(ToggleKeyboardVisibility(true));
+            nameField.onValueChanged.AddListener(UpdateStartButtonInteractivity());
+        }
+
+        private UnityAction<string> ToggleKeyboardVisibility(bool visible)
+        {
+            return val =>
+            {
+                keyboardView.ToggleVisibility(visible);
+
+                if (visible)
+                {
+                    ToggleInteractivity(false);
+                }
+            };
+        }
+
+        public override void ToggleVisibility(bool on)
+        {
+            UpdateStartButtonInteractivity();
+            base.ToggleVisibility(on);
+        }
+        
+        
+
+        public UnityAction<string> UpdateStartButtonInteractivity()
+        {
+            return val =>
+            {
+                startButton.interactable = !string.IsNullOrEmpty(val);
+            };
         }
 
         #region Callbacks
-
-        private void OnDifficultyChanged()
-        {
-            
-        }
         
         private void OnMusicChanged()
         {
@@ -77,6 +103,15 @@ namespace RacketRush.RR.Views.UI
             for (int i = 0; i < bgEnvironments.Length; i++)
             {
                 bgEnvironments[i].SetActive(i == backgroundSelectionView.SelectionIndex);
+            }
+        }
+
+        public void OnClear()
+        {
+            if (!string.IsNullOrEmpty(nameField.text))
+            {
+                string currentText = nameField.text;
+                nameField.text = currentText.Remove(currentText.Length - 1);
             }
         }
 

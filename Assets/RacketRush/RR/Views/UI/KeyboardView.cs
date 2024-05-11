@@ -43,6 +43,8 @@ namespace RacketRush.RR.Views.UI
         {
             PopulateKeysByRange(GameConstants.KEYBOARD_CHAR_LETTER_INIT, GameConstants.KEYBOARD_CHAR_LETTER_LAST);
             PopulateKeysByRange(GameConstants.KEYBOARD_CHAR_NUMBER_INIT, GameConstants.KEYBOARD_CHAR_NUMBER_LAST);
+            okButton.onClick.AddListener(OnOkButtonPressed);
+            clearButton.onClick.AddListener(OnClearButtonPressed);
         }
 
         private void PopulateKeysByRange(int initAsciiIndex, int lastAsciiIndex)
@@ -60,6 +62,17 @@ namespace RacketRush.RR.Views.UI
         private void OnKeyPressed(string s)
         {
             _targetText.text += s;
+        }
+
+        private void OnOkButtonPressed()
+        {
+            ToggleVisibility(false);
+            _configWindowView.ToggleInteractivity(true);
+        }
+        
+        private void OnClearButtonPressed()
+        {
+            _configWindowView.OnClear();
         }
     }
 }
