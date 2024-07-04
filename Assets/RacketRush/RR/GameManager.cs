@@ -95,6 +95,11 @@ namespace RacketRush.RR
             UpdateTimer();
         }
 
+        public void UpdatePlayerName(string name)
+        {
+            _currentState.Name = name;
+        }
+
         private void UpdateTimer()
         {
             _timeSequence = DOTween.Sequence();
@@ -138,6 +143,7 @@ namespace RacketRush.RR
             homeWindowView.ToggleVisibility(true);
             ballThrowerView.StopBallThrowSequence();
             targetHandlerView.StopTargetGeneration();
+            StorageUtils.SaveGameState(_currentState);
         }
 
         #endregion

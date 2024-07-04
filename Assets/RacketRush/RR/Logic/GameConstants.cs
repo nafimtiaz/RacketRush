@@ -21,5 +21,7 @@ namespace RacketRush.RR.Logic
         public static readonly int KEYBOARD_CHAR_LETTER_LAST = 90;
         public static readonly int KEYBOARD_CHAR_NUMBER_INIT = 48;
         public static readonly int KEYBOARD_CHAR_NUMBER_LAST = 57;
+        
+        public static readonly string GAME_STATS_KEY = "GameStats";
     }
 }

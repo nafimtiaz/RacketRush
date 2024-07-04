@@ -8,6 +8,7 @@ namespace RacketRush.RR.Views.UI
         [SerializeField] private GameConfigWindowView gameConfigWindowView;
         [SerializeField] private CountdownWindowView countdownWindowView;
         [SerializeField] private ScorePopupWindowView scorePopupWindowView;
+        [SerializeField] private LeaderboardWindowView leaderboardWindowView;
         [SerializeField] private GameObject uiPointer;
 
         protected override bool IsValidComponent
@@ -18,6 +19,7 @@ namespace RacketRush.RR.Views.UI
                     gameConfigWindowView == null ||
                     countdownWindowView == null ||
                     scorePopupWindowView == null ||
+                    leaderboardWindowView == null ||
                     uiPointer == null)
                 {
                     return false;
@@ -35,6 +37,7 @@ namespace RacketRush.RR.Views.UI
             gameConfigWindowView.ToggleVisibility(false);
             scorePopupWindowView.ToggleVisibility(false);
             scorePopupWindowView.Populate(this);
+            leaderboardWindowView.Populate(this);
         }
 
         public override void ToggleVisibility(bool on)
@@ -51,15 +54,27 @@ namespace RacketRush.RR.Views.UI
             gameConfigWindowView.ToggleVisibility(true);
         }
         
-        public void OnLeaderboardButtonClicked()
-        {
-            menuWindowView.ToggleVisibility(false);
-            gameConfigWindowView.ToggleVisibility(true);
-        }
-        
         public void OnQuitButtonClicked()
         {
             Application.Quit();
+        }
+
+        #endregion
+
+        #region Leaderboard
+
+        public void OnLeaderboardButtonClicked()
+        {
+            menuWindowView.ToggleVisibility(false);
+            leaderboardWindowView.ToggleVisibility(true);
+            leaderboardWindowView.CreateLeaderboardTable();
+        }
+        
+        public void OnLeaderboardExitButtonClicked()
+        {
+            menuWindowView.ToggleVisibility(true);
+            leaderboardWindowView.ClearAllEntries();
+            leaderboardWindowView.ToggleVisibility(false);
         }
 
         #endregion
@@ -77,7 +92,7 @@ namespace RacketRush.RR.Views.UI
             gameConfigWindowView.ToggleVisibility(false);
             menuWindowView.ToggleVisibility(true);
         }
-
+        
         #endregion
 
         #region Countdown Window

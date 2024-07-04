@@ -67,6 +67,7 @@ namespace RacketRush.RR.Views.UI
         private void OnOkButtonPressed()
         {
             ToggleVisibility(false);
+            GameManager.Instance.UpdatePlayerName(_targetText.text);
             _configWindowView.ToggleInteractivity(true);
         }
         
