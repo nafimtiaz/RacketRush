@@ -15,13 +15,20 @@ namespace RacketRush.RR.Views.Actors
         private Material _activeMaterial;
         private Material _idleMaterial;
         
+        private TargetHandlerView _targetHandler;
         private int _triangleIndex;
         private bool _isActive;
         private MeshRenderer _meshRenderer;
         private Action _onHitSuccess;
         
-        public void Populate(int triangleIndex, Material activeMaterial, Material idleMaterial, Action onHitSuccess)
+        public void Populate(
+            TargetHandlerView targetHandler,
+            int triangleIndex, 
+            Material activeMaterial, 
+            Material idleMaterial, 
+            Action onHitSuccess)
         {
+            _targetHandler = targetHandler;
             _triangleIndex = triangleIndex;
             _meshRenderer = GetComponent<MeshRenderer>();
             _activeMaterial = activeMaterial;
@@ -48,6 +55,7 @@ namespace RacketRush.RR.Views.Actors
             {
                 _onHitSuccess.Invoke();
                 Debug.Log($"Hit triangle {_triangleIndex}");
+                _targetHandler.OnTargetHit();
             }
         }
     }

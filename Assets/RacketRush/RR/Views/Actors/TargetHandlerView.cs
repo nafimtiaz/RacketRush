@@ -18,6 +18,8 @@ namespace RacketRush.RR.Views.Actors
         [SerializeField] private Material disabledMaterial;
         [SerializeField] private Transform targetsParent;
         [SerializeField] private Transform dummiesParent;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip hitSuccessClip;
 
         // Each int[] represents the indices of the points of triangular targets
         private int[][] _triangleIndexList = new int[][]
@@ -172,7 +174,7 @@ namespace RacketRush.RR.Views.Actors
             {
                 TargetView targetView = triangleObject.AddComponent<TargetView>();
                 meshCollider.sharedMesh = mesh;
-                targetView.Populate(triangleIndex, activeMaterial, idleMaterial, _onHitSuccess);
+                targetView.Populate(this, triangleIndex, activeMaterial, idleMaterial, _onHitSuccess);
                 _targets.Add(targetView);
                 triangleObject.transform.SetParent(targetsParent);
             }
@@ -228,9 +230,10 @@ namespace RacketRush.RR.Views.Actors
 
         #region Post Target Hit
 
-        private void OnTargetHit(TargetView t)
+        public void OnTargetHit()
         {
-            // TODO: Handle on target hit
+            audioSource.clip = hitSuccessClip;
+            audioSource.Play();
         }
 
         #endregion

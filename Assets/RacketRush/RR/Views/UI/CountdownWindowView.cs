@@ -3,7 +3,6 @@ using DG.Tweening;
 using RacketRush.RR.Logic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace RacketRush.RR.Views.UI
 {
@@ -11,6 +10,8 @@ namespace RacketRush.RR.Views.UI
     {
         [SerializeField] private TextMeshProUGUI solidText;
         [SerializeField] private TextMeshProUGUI linedText;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip countdownClip;
 
         private HomeWindowView _homeWindowView;
         private Sequence _countdownSequence;
@@ -20,7 +21,9 @@ namespace RacketRush.RR.Views.UI
             get
             {
                 if (solidText == null ||
-                    linedText == null)
+                    linedText == null ||
+                    audioSource == null ||
+                    countdownClip == null)
                 {
                     return false;
                 }
@@ -36,6 +39,7 @@ namespace RacketRush.RR.Views.UI
 
         public void StartCountdownSequence(Action onComplete)
         {
+            StartCountdownSound();
             int msgIndex = 0;
             linedText.transform.DOScale(Vector3.one, 0f);
             linedText.DOFade(1f, 0f);
@@ -61,6 +65,12 @@ namespace RacketRush.RR.Views.UI
                     }
                 });
             }
+        }
+
+        private void StartCountdownSound()
+        {
+            audioSource.clip = countdownClip;
+            audioSource.Play();
         }
 
         private void OnDestroy()
