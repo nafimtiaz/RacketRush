@@ -64,6 +64,7 @@ namespace RacketRush.RR
         {
             InitGameState();
             homeWindowView.Populate();
+            targetHandlerView.Populate(OnHitSuccess);
         }
 
         #region Update Game State
@@ -89,7 +90,7 @@ namespace RacketRush.RR
             homeWindowView.ToggleVisibility(false);
             gameStatsWindowView.ToggleVisibility(true);
             gameStatsWindowView.ResetValues();
-            targetHandlerView.Populate(OnHitSuccess);
+            targetHandlerView.StartTargetGeneration();
             ballThrowerView.Populate(OnNewBallThrow);
             _isGameRunning = true;
             UpdateTimer();

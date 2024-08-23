@@ -82,7 +82,6 @@ namespace RacketRush.RR.Views.Actors
         {
             _onHitSuccess = onHitSuccess;
             GenerateAndCacheTargets();
-            StartTargetGeneration();
         }
         
         #region Target Creation
@@ -151,6 +150,17 @@ namespace RacketRush.RR.Views.Actors
             // Assign vertices and triangles to the mesh
             mesh.vertices = vertices;
             mesh.triangles = triangles;
+            
+            // Define UVs (mapping the triangle to a full texture)
+            Vector2[] uvs = new Vector2[]
+            {
+                new Vector2(0, 0),  // Bottom-left corner of the texture
+                new Vector2(1, 0),  // Bottom-right corner of the texture
+                new Vector2(0.5f, 1)  // Top-center of the texture
+            };
+
+            // Assign UVs to the mesh
+            mesh.uv = uvs;
 
             // Recalculate normals (important for rendering)
             mesh.RecalculateNormals();
