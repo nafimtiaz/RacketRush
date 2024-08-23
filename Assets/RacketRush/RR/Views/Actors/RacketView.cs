@@ -71,6 +71,7 @@ namespace RacketRush.RR.Views.Actors
                 Vector3 forceDir = velocity;
                 float effectiveForce = 10f + (velocity.magnitude * forceMultiplier);
                 _colBuffer[i].attachedRigidbody.AddForce(forceDir * effectiveForce);
+                _colBuffer[i].GetComponent<BallView>().OnBallHitByRacket();
             }
         }
 

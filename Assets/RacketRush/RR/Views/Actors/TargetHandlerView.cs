@@ -20,51 +20,8 @@ namespace RacketRush.RR.Views.Actors
         [SerializeField] private Transform dummiesParent;
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip hitSuccessClip;
-
-        // Each int[] represents the indices of the points of triangular targets
-        private int[][] _triangleIndexList = new int[][]
-        {
-            new [] {0,1,2},
-            new [] {0,2,3},
-            new [] {0,3,4},
-            new [] {0,4,5},
-            new [] {0,5,1},
-            new [] {5,7,1},
-            new [] {1,7,8},
-            new [] {9,1,8},
-            new [] {2,1,9},
-            new [] {10,2,9},
-            new [] {11,2,10},
-            new [] {11,3,2},
-            new [] {12,3,11},
-            new [] {12,13,3},
-            new [] {13,4,3},
-            new [] {13,14,4},
-            new [] {4,14,15},
-            new [] {4,15,5},
-            new [] {5,15,6},
-            new [] {5,6,7},
-            new [] {6,16,17},
-            new [] {6,17,7},
-            new [] {7,17,18},
-            new [] {7,18,8},
-            new [] {8,18,19},
-            new [] {9,8,19},
-            new [] {9,19,20},
-            new [] {10,9,20},
-            new [] {10,20,21},
-            new [] {21,11,10},
-            new [] {22,11,21},
-            new [] {22,12,11},
-            new [] {22,23,12},
-            new [] {12,23,13},
-            new [] {23,24,13},
-            new [] {24,14,13},
-            new [] {24,25,14},
-            new [] {14,25,15},
-            new [] {15,25,16},
-            new [] {15,16,6}
-        };
+        [SerializeField] private ParticleSystem impactFX;
+        [SerializeField] private AudioSource impactSoundFX;
 
         // Some triangles are not targets, they just prevent the ball from going outside
         private int[] _disabledTriangleIndices =
@@ -95,7 +52,7 @@ namespace RacketRush.RR.Views.Actors
 
             _activeTriangleIndices = new List<int>();
             
-            for (int i = 0; i < _triangleIndexList.Length; i++)
+            for (int i = 0; i < GameConstants.TRIANGLE_INDEX_ARR.Length; i++)
             {
                 bool isDummy = _disabledTriangleIndices.Contains(i);
                 
@@ -104,12 +61,12 @@ namespace RacketRush.RR.Views.Actors
                     _activeTriangleIndices.Add(i);    
                 }
                 
-                GenerateTargetFromPoints(_triangleIndexList[i], i, isDummy);
+                GenerateTargetFromPoints(GameConstants.TRIANGLE_INDEX_ARR[i], i, isDummy);
             }
 
             foreach (var i in _disabledTriangleIndices)
             {
-                GenerateTargetFromPoints(_triangleIndexList[i], i, true, true);
+                GenerateTargetFromPoints(GameConstants.TRIANGLE_INDEX_ARR[i], i, true, true);
             }
         }
 
@@ -240,10 +197,16 @@ namespace RacketRush.RR.Views.Actors
 
         #region Post Target Hit
 
-        public void OnTargetHit()
+        public void OnTargetHit(Vector3 pos)
         {
+            impactFX.transform.position = pos;
+            impactFX.Play();
             audioSource.clip = hitSuccessClip;
             audioSource.Play();
+            
+            // change target impact sound source position then play
+            impactSoundFX.transform.position = pos;
+            impactFX.Play();
         }
 
         #endregion

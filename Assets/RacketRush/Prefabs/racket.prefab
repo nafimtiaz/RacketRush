@@ -60,7 +60,7 @@ MonoBehaviour:
   stationaryThreshold: 0.383
   racketMass: 0.32
   racketHitHapticClip: {fileID: 2460798210113038985, guid: 6b8606ec886c4d1458dd34b869f4c03c, type: 3}
-  racketHitSoundClip: {fileID: 8300000, guid: 5544399e81924e1499ad0a790d7551b0, type: 3}
+  racketHitSoundClip: {fileID: 8300000, guid: b4ce975868fff68458a47704dd4a8cdf, type: 3}
 --- !u!82 &3080569304984913181
 AudioSource:
   m_ObjectHideFlags: 0

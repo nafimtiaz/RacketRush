@@ -1,4 +1,5 @@
 using System.Collections;
+using RacketRush.RR.Logic;
 using RacketRush.RR.Utils;
 using UnityEngine;
 
@@ -10,6 +11,10 @@ namespace RacketRush.RR.Views.Actors
         [SerializeField] [Range(5f, 20f)] private float ballLife;
         [SerializeField] private AudioClip[] ballCollisionSoundClips;
         [SerializeField] [Range(1,5)] private int maxCollisionSound;
+        [SerializeField] private GameObject ballMeshParent;
+        [SerializeField] private GameObject ballFX;
+
+        private bool IsBallFXEnabled;
         
         protected override bool IsValidComponent
         {
@@ -58,7 +63,21 @@ namespace RacketRush.RR.Views.Actors
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (IsBallFXEnabled)
+            {
+                IsBallFXEnabled = false;
+                ballMeshParent.SetActive(true);
+                ballFX.SetActive(false);    
+            }
+            
             PlayCollisionSound();
+        }
+
+        public void OnBallHitByRacket()
+        {
+            IsBallFXEnabled = true;
+            ballMeshParent.SetActive(false);
+            ballFX.SetActive(true);
         }
 
         #region Sound

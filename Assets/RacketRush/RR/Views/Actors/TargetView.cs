@@ -55,7 +55,7 @@ namespace RacketRush.RR.Views.Actors
             {
                 _onHitSuccess.Invoke();
                 Debug.Log($"Hit triangle {_triangleIndex}");
-                _targetHandler.OnTargetHit();
+                _targetHandler.OnTargetHit(collision.contacts[0].point);
             }
         }
     }
