@@ -20434,7 +20434,7 @@ MonoBehaviour:
   homeWindowView: {fileID: 8382886983758471068}
   racketBody: {fileID: 1677284967}
   baseScorePerHit: 10
-  gameDuration: 30
+  gameDuration: 90
 --- !u!4 &1650636207
 Transform:
   m_ObjectHideFlags: 0
