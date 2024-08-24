@@ -4,7 +4,7 @@ using UnityEngine;
 namespace RacketRush.RR.Views.Actors
 {
     [RequireComponent(typeof(MeshCollider))]
-    public class TargetView : MonoBehaviour
+    public class TargetView : BaseView
     {
         public int TriangleIndex
         {

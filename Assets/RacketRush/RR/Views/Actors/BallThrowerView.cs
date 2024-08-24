@@ -27,7 +27,8 @@ namespace RacketRush.RR.Views.Actors
                     ballThrowSoundClip == null ||
                     ballThrowerPlatformAnimator == null ||
                     ballThrowerLookAtPoint == null ||
-                    ballThrowerDeviceParent == null)
+                    ballThrowerDeviceParent == null ||
+                    ballThrowerLookAtPoint == null)
                 {
                     return false;
                 }

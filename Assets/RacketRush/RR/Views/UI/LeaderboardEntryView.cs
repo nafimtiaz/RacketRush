@@ -27,9 +27,9 @@ namespace RacketRush.RR.Views.UI
             }
         }
 
-        public void Populate(GameState state)
+        public void Populate(GameState state, int index)
         {
-            nameText.text = state.Name;
+            nameText.text = $"{index}. {state.Name}";
             scoreText.text = state.Score.ToString();
             accuracyText.text = state.Accuracy.ToString("F1");
         }

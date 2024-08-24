@@ -1,5 +1,4 @@
 using System.Collections;
-using RacketRush.RR.Logic;
 using RacketRush.RR.Utils;
 using UnityEngine;
 
@@ -20,7 +19,9 @@ namespace RacketRush.RR.Views.Actors
         {
             get
             { 
-                if (!ballCollisionSoundClips.HasValidLength(4))
+                if (!ballCollisionSoundClips.HasValidLength(4) ||
+                    ballMeshParent == null ||
+                    ballFX == null)
                 {
                     return false;
                 }

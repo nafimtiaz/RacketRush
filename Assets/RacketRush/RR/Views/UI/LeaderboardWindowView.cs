@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using RacketRush.RR.Logic;
 using RacketRush.RR.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -61,12 +60,12 @@ namespace RacketRush.RR.Views.UI
             var entries = StorageUtils.GetGameState();
             ClearAllEntries();
 
-            foreach (var entry in entries)
+            for (int i = 0; i < entries.Count; i++)
             {
                 GameObject leaderboardEntryViewObject = Instantiate(leaderboardEntryPrefab, leaderboardEntriesParent);
                 LeaderboardEntryView leaderboardEntryView = leaderboardEntryViewObject.GetComponent<LeaderboardEntryView>();
                 _currentLeaderboardEntries.Add(leaderboardEntryView);
-                leaderboardEntryView.Populate(entry);
+                leaderboardEntryView.Populate(entries[i], i + 1);
             }
         }
     }

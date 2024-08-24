@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace RacketRush.RR.Views
@@ -11,7 +10,7 @@ namespace RacketRush.RR.Views
         {
             if (!IsValidComponent)
             {
-                Debug.LogError($"Component [{name}] on Gameobject [${gameObject.name}] is INVALID!!");
+                Debug.LogError($"Component [{name}] on Gameobject [{gameObject.name}] is INVALID!!");
             }
         }
     }

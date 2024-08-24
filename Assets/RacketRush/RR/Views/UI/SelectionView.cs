@@ -9,11 +9,26 @@ using UnityEngine.UI;
 
 namespace RacketRush.RR.Views.UI
 {
-    public class SelectionView : MonoBehaviour
+    public class SelectionView : BaseView
     {
         [SerializeField] private Button prevBtn;
         [SerializeField] private Button nextBtn;
         [SerializeField] private TextMeshProUGUI currentValue;
+
+        protected override bool IsValidComponent
+        {
+            get
+            {
+                if (prevBtn == null ||
+                    nextBtn == null ||
+                    currentValue == null)
+                {
+                    return false;
+                }
+
+                return base.IsValidComponent;
+            }
+        }
 
         private List<string> _options;
         private int _selectedOptionIndex;

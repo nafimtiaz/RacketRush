@@ -8,6 +8,20 @@ namespace RacketRush.RR.Views.UI
         [SerializeField] private TextMeshProUGUI timeText;
         [SerializeField] private TextMeshProUGUI scoreText;
 
+        protected override bool IsValidComponent
+        {
+            get
+            {
+                if (timeText == null ||
+                    scoreText == null)
+                {
+                    return false;
+                }
+
+                return base.IsValidComponent;
+            }
+        }
+
         public void IncrementScore(int score)
         {
             scoreText.text = score.ToString();

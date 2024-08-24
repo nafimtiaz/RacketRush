@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using RacketRush.RR.Logic;
+using RacketRush.RR.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace RacketRush.RR.Views.Actors
 {
     // This class creates and manages the targets
-    public class TargetHandlerView : MonoBehaviour
+    public class TargetHandlerView : BaseView
     {
         [Tooltip("The points on the dome")]
         [SerializeField] private Transform[] points;
@@ -22,6 +23,28 @@ namespace RacketRush.RR.Views.Actors
         [SerializeField] private AudioClip hitSuccessClip;
         [SerializeField] private ParticleSystem impactFX;
         [SerializeField] private AudioSource impactSoundFX;
+
+        protected override bool IsValidComponent
+        {
+            get
+            {
+                if (!points.HasValidLength(26)||
+                    activeMaterial == null ||
+                    idleMaterial == null ||
+                    disabledMaterial == null ||
+                    targetsParent == null ||
+                    dummiesParent == null ||
+                    audioSource == null ||
+                    hitSuccessClip == null ||
+                    impactFX == null ||
+                    impactSoundFX == null)
+                {
+                    return false;
+                }
+
+                return base.IsValidComponent;
+            }
+        }
 
         // Some triangles are not targets, they just prevent the ball from going outside
         private int[] _disabledTriangleIndices =

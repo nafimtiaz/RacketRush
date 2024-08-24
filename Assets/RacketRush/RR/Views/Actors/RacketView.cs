@@ -5,7 +5,7 @@ using UnityEngine;
 namespace RacketRush.RR.Views.Actors
 {
     [RequireComponent(typeof(AudioSource))]
-    public class RacketView : MonoBehaviour
+    public class RacketView : BaseView
     {
         [SerializeField] private Transform detectionCenter;
         [SerializeField] [Range(0.01f,1f)] private float forceMultiplier;
@@ -18,6 +18,22 @@ namespace RacketRush.RR.Views.Actors
         [SerializeField] [Range(0.3f,0.4f)] private float racketMass;
         [SerializeField] private HapticClip racketHitHapticClip;
         [SerializeField] private AudioClip racketHitSoundClip;
+
+        protected override bool IsValidComponent
+        {
+            get
+            {
+                if (detectionCenter == null ||
+                    racketPhysicsMaterial == null ||
+                    racketHitHapticClip == null ||
+                    racketHitSoundClip == null)
+                {
+                    return false;
+                }
+
+                return base.IsValidComponent;
+            }
+        }
 
         private Collider[] _colBuffer;
         private Rigidbody _racketDynamicRb;
